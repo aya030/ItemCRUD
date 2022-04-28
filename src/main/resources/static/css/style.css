@@ -1,0 +1,176 @@
+/*共通CSS*/
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+header {
+	height: 60px;
+	background-color: #6D7993;
+}
+
+main {
+    max-width: 900px;
+	margin:0 auto;
+}
+
+h1 {
+	font-size: 24px;
+	font-weight: normal;
+	color: #fff;
+	line-height: 60px;
+	max-width: 900px;
+	margin:0 auto;
+	font-family: 'Sorts Mill Goudy', serif;
+}
+
+h2 {
+	margin: 32px 0;
+	color: #333;
+	font-weight: normal;
+	padding-left: 10px;
+	border-left: 6px solid #6D7993;
+}
+
+a {
+	text-decoration: none;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 5px 20px;
+    font-weight: normal;
+}
+
+table th {
+    background-color: #F2F2F2;
+}
+
+.table-td {
+	display: flex;
+	border-top: 0px none;
+	border-left: 0px none;
+}
+
+/*index.html*/
+.p-index-form {
+	display: flex;
+	margin-bottom: 32px;
+}
+
+.p-index-form input {
+	display: inline-block;
+	height: 32px;
+}
+
+.p-index-form input.input {
+	width: 240px;
+	margin-left: 20px;
+}
+
+.p-index-form input.search {
+	padding: 0 20px;
+	margin-left: 10px;
+	background-color: #96858F;
+	border: 0px none;
+	border-radius: 5px;
+	color:  #fff;
+}
+
+.p-index-form input.search:hover {
+	opacity: 0.8;
+}
+
+/*new.html*/
+/*edit.html*/
+.l-register {
+	padding-bottom: 30px;
+}
+
+.p-register-form .input {
+	display: flex;
+	margin-bottom: 16px;
+}
+
+.p-register-form .input.num {
+	margin-bottom: 40px;
+}
+
+.p-register-form label {
+	display: block;
+	font-size: 16px;
+	width: 100px;
+	margin-right: 20px;
+	background-color: #9099a2;
+	border-radius: 5px;
+	text-align: center;
+	color: #fff;
+	padding: 6px 0;
+}
+
+.p-register-form input {
+	width: 320px;
+}
+
+.p-register-form .form-check-input {
+	width: 20px;
+	margin-right: 5px;
+}
+
+.p-register-category div {
+   margin-right: 15px;
+   line-height: 36px;
+}
+
+/*Button*/
+button {
+	height: 32px;
+	border: 0px none;
+	border-radius: 5px;
+	font-size: 16px;
+	color:  #fff;
+    display: block;
+    padding: 0 20px;
+}
+
+button:hover {
+	opacity: 0.8;
+}
+
+.c-button-new-register {
+	margin-bottom: 16px;
+	background-color: #6D7993;
+	height: 40px;
+}
+
+.c-button-new {
+	margin-bottom: 16px;
+	background-color: #6D7993;
+	height: 60px;
+	width: 180px;
+}
+
+.c-button-detail {
+	background-color: #6D7993;
+	margin: 0 10px;
+}
+
+.c-button-edit {
+	background-color: #96858F;
+	margin: 0 10px;
+}
+
+.c-button-delete {
+	background-color: #9099a2;
+	margin: 0 10px;
+}
+
+.c-button-back {
+	margin-top: 40px;
+    background-color: #96858F;
+    height: 40px;
+}
