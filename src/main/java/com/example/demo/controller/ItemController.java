@@ -41,28 +41,27 @@ public class ItemController {
 		model.addAttribute("title", "商品APP_検索結果");
 		model.addAttribute("logo", "AyaDesign");
 
-		// itemform（formクラス）がnullじゃなかったら1件検索
-		if (itemForm.getId() != null) {
-			Item item = itemService.findById(itemForm.getId());
-			model.addAttribute("item", item);
-		}
+		Item item = itemService.findById(itemForm.getId());
+		model.addAttribute("item", item);
+
 		return "items/search";
 	}
 
 	/* 詳細 */
-	@GetMapping("detail/id={id}")
+	@GetMapping("/detail/id={id}")
 	public String detail(ItemForm itemForm, @PathVariable("id") Integer id, Model model) {
 
 		model.addAttribute("title", "商品APP_商品詳細");
 		model.addAttribute("logo", "AyaDesign");
 
-		Item item = itemService.findById(itemForm.getId());
+		Item item = itemService.findById(id);
 		model.addAttribute("item", item);
+
 		return "items/detail";
 	}
 
 	/* 新規商品登録 */
-	@GetMapping("new")
+	@GetMapping("/new")
 	public String newItem(Model model, @ModelAttribute Item item) {
 
 		model.addAttribute("title", "商品APP_新規登録");
@@ -85,7 +84,7 @@ public class ItemController {
 	}
 
 	/* 更新 */
-	@GetMapping("edit/id={id}")
+	@GetMapping("/edit/id={id}")
 	public String edit(@PathVariable("id") int id, Model model) {
 
 		model.addAttribute("title", "商品APP_更新");
@@ -98,14 +97,14 @@ public class ItemController {
 		return "items/edit";
 	}
 
-	@PostMapping("edit/id={id}")
+	@PostMapping("/edit/id={id}")
 	public String update(@ModelAttribute Item item) {
 		itemService.updateOne(item.getId(), item.getName(), item.getPrice(), item.getCategory(), item.getNum());
 		return "redirect:/items/index";
 	}
 
 	/* 削除 */
-	@PostMapping("delete/id={id}")
+	@PostMapping("/delete/id={id}")
 	public String delete(@PathVariable("id") int id) {
 		itemService.deleteOne(id);
 		return "redirect:/items/index";

@@ -15,6 +15,10 @@
 	<main>
 		<h2>商品検索結果</h2>
 
+		<div th:if="${item} == null" th:object="${item}">
+			<p>検索したIDの商品はありません</p>
+		</div>
+
 		<div th:if="${item} !=null" th:object="${item}">
 			<table>
 				<tr>
