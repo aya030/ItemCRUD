@@ -12,9 +12,12 @@ import com.example.demo.repository.ItemMapper;
 
 @Service
 public class ItemService {
+	private final ItemMapper itemMapper;
 
 	@Autowired
-	ItemMapper itemMapper;
+	public ItemService(ItemMapper itemMapper) {
+		this.itemMapper = itemMapper;
+	}
 
 	// 1件検索
 	public Item findById(Integer id) {
