@@ -50,7 +50,7 @@ public class ItemController {
 	}
 
 	/* 詳細 */
-	@GetMapping("/detail/id={id}")
+	@GetMapping("detail/id={id}")
 	public String detail(ItemForm itemForm, @PathVariable("id") Integer id, Model model) {
 
 		model.addAttribute("title", "商品APP_商品詳細");
@@ -62,7 +62,7 @@ public class ItemController {
 	}
 
 	/* 新規商品登録 */
-	@GetMapping("/new")
+	@GetMapping("new")
 	public String newItem(Model model, @ModelAttribute Item item) {
 
 		model.addAttribute("title", "商品APP_新規登録");
@@ -85,7 +85,7 @@ public class ItemController {
 	}
 
 	/* 更新 */
-	@GetMapping("/edit/id={id}")
+	@GetMapping("edit/id={id}")
 	public String edit(@PathVariable("id") int id, Model model) {
 
 		model.addAttribute("title", "商品APP_更新");
@@ -98,16 +98,16 @@ public class ItemController {
 		return "items/edit";
 	}
 
-	@PostMapping("/edit/id={id}")
-	public String update(@ModelAttribute Item item, Model model) {
+	@PostMapping("edit/id={id}")
+	public String update(@ModelAttribute Item item) {
 		itemService.updateOne(item.getId(), item.getName(), item.getPrice(), item.getCategory(), item.getNum());
 		return "redirect:/items/index";
 	}
 
 	/* 削除 */
-	@PostMapping("/delete/id={id}")
-	public String delete(@PathVariable String id, @ModelAttribute Item item) {
-		itemService.deleteOne(item);
+	@PostMapping("delete/id={id}")
+	public String delete(@PathVariable("id") int id) {
+		itemService.deleteOne(id);
 		return "redirect:/items/index";
 	}
 

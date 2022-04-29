@@ -23,6 +23,6 @@ public interface ItemMapper {
 			@Param("category") String category, @Param("num") int num);
 
 	// 削除
-	public void deleteOne(Item item);
+	public Integer deleteOne(int id);
 
 }

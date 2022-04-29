@@ -39,8 +39,8 @@ public class ItemService {
 	}
 
 	// 削除
-	public void deleteOne(Item item) {
-		itemMapper.deleteOne(item);
+	public void deleteOne(int id) {
+		itemMapper.deleteOne(id);
 	}
 
 	// ラジオボタン(新規登録・更新)
