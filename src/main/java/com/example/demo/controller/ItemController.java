@@ -28,6 +28,8 @@ public class ItemController {
 	/* Top */
 	@RequestMapping("/index")
 	public String index(ItemForm itemForm, Model model) {
+
+		model.addAttribute("title", "商品APP_一覧画面");
 		model.addAttribute("logo", "AyaDesign");
 		List<Item> itemList = itemService.getItemList();
 		model.addAttribute("itemList", itemList);
@@ -109,5 +111,4 @@ public class ItemController {
 		itemService.deleteOne(id);
 		return "redirect:/items/index";
 	}
-
 }

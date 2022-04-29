@@ -49,6 +49,21 @@
 					</td>
 				</tr>
 			</table>
+				<tr>
+					<td th:text="*{id}">id</td>
+					<td th:text="*{name}">商品名</td>
+					<td th:text="*{price}">価格</td>
+					<td th:text="*{category}">カテゴリー</td>
+					<td th:text="*{num}">数量</td>
+					<td class="table-td">
+						<a th:href="@{/items/detail/id={id}(id=*{id})}"><button class="c-button-detail">詳細</button></a>
+						<a th:href="@{/items/edit/id={id}(id=*{id})}"><button class="c-button-edit">変更</button></a>
+
+						<form th:method="post" th:action="@{/items/delete/id={id}(id=*{id})}">
+							<button class="c-button-delete">削除</button>
+						</form>
+					</td>
+				</tr>
 		</div>
 	</main>
 </body>
