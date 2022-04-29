@@ -27,7 +27,7 @@ public class ItemController {
 
 	/* Top */
 	@RequestMapping("/index")
-	public String index(ItemForm itemForm, String showList, Model model) {
+	public String index(ItemForm itemForm, Model model) {
 		model.addAttribute("logo", "AyaDesign");
 		List<Item> itemList = itemService.getItemList();
 		model.addAttribute("itemList", itemList);
@@ -36,7 +36,7 @@ public class ItemController {
 
 	/* 検索結果 */
 	@GetMapping("/search")
-	public String search(ItemForm itemForm, String showList, Model model) {
+	public String search(ItemForm itemForm, Model model) {
 
 		model.addAttribute("title", "商品APP_検索結果");
 		model.addAttribute("logo", "AyaDesign");
