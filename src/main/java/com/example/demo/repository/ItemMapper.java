@@ -10,7 +10,7 @@ import com.example.demo.entity.Item;
 @Mapper
 public interface ItemMapper {
 //1件検索
-	public Item findById(Item item);
+	public Item findById(int id);
 
 //全件取得
 	public List<Item> findAll();

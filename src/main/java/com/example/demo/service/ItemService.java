@@ -21,9 +21,7 @@ public class ItemService {
 
 	// 1件検索
 	public Item findById(Integer id) {
-		Item item = new Item();
-		item.setId(id);
-		return itemMapper.findById(item);
+		return itemMapper.findById(id);
 	}
 
 	// 全件取得
