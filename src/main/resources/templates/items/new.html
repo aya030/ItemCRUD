@@ -28,8 +28,8 @@
 				<label class="c-input__label" for="category">カテゴリー</label>
 				<div th:each="item : ${radioCategory}" class="form-check-inline">
 					<div class="p-register__category-container">
-						<input id="category" type="radio" class="form-check-input c-input__checkbox" th:text="${item.value}"
-							th:value="${item.value}" 　th:field="*{category}">
+						<input id="category" type="radio" class="form-check-input c-input__checkbox"
+							th:text="${item.value}" th:value="${item.value}" 　th:field="*{category}">
 					</div>
 				</div>
 			</div>

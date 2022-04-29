@@ -120,7 +120,7 @@ public class ItemController {
 	}
 
 	/*
-	 * 例外処理 -----------------
+	 * 例外処理
 	 */
 
 	/* /detail/{id}のIDがない時 */
@@ -153,7 +153,7 @@ public class ItemController {
 		return "error";
 	}
 
-	/* 検索が空の時 */
+	/* 検索がID(数字）以外の時 */
 	@ExceptionHandler(BindException.class)
 	public String bindExceptionnHandler(Model model) {
 		model.addAttribute("status", "400エラー");
