@@ -1,17 +1,9 @@
-/*共通CSS*/
+/*---------------------------------
+  base(共通)
+---------------------------------*/
 * {
     margin: 0px;
     padding: 0px;
-}
-
-header {
-	height: 60px;
-	background-color: #6D7993;
-}
-
-main {
-    max-width: 900px;
-	margin:0 auto;
 }
 
 h1 {
@@ -36,6 +28,9 @@ a {
 	text-decoration: none;
 }
 
+/*---------------------------------
+  table(共通)
+---------------------------------*/
 table {
     border-collapse: collapse;
 }
@@ -50,83 +45,64 @@ table th {
     background-color: #F2F2F2;
 }
 
-.table-td {
+.c-table__lasttd {
 	display: flex;
 	border-top: 0px none;
 	border-left: 0px none;
 }
 
-/*index.html*/
-.p-index-form {
+/*---------------------------------
+  l-header(header共通)
+---------------------------------*/
+.l-header {
+	height: 60px;
+	background-color: #6D7993;
+}
+
+/*---------------------------------
+  l-main(main共通)
+---------------------------------*/
+.l-main {
+    max-width: 900px;
+	margin:0 auto;
+}
+
+/*---------------------------------
+  p-index(index.html)
+---------------------------------*/
+.p-index__form {
 	display: flex;
 	margin-bottom: 32px;
 }
 
-.p-index-form input {
+.p-index__input {
 	display: inline-block;
-	height: 32px;
-}
-
-.p-index-form input.input {
 	width: 240px;
+	height: 32px;
 	margin-left: 20px;
 }
 
-.p-index-form input.search {
-	padding: 0 20px;
-	margin-left: 10px;
-	background-color: #96858F;
-	border: 0px none;
-	border-radius: 5px;
-	color:  #fff;
-}
-
-.p-index-form input.search:hover {
-	opacity: 0.8;
-}
-
-/*new.html*/
-/*edit.html*/
-.l-register {
-	padding-bottom: 30px;
-}
-
-.p-register-form .input {
+/*---------------------------------
+  p-register(new.html,edit.html)
+---------------------------------*/
+.p-register__input-container {
 	display: flex;
 	margin-bottom: 16px;
 }
 
-.p-register-form .input.num {
+.p-register__input-container:last-of-type{
 	margin-bottom: 40px;
 }
 
-.p-register-form label {
-	display: block;
-	font-size: 16px;
-	width: 100px;
-	margin-right: 20px;
-	background-color: #9099a2;
-	border-radius: 5px;
-	text-align: center;
-	color: #fff;
-	padding: 6px 0;
+.p-register__category-container {
+	margin-right: 15px;
+    line-height: 36px;
 }
 
-.p-register-form input {
-	width: 320px;
-}
-
-.p-register-form .form-check-input {
-	width: 20px;
-	margin-right: 5px;
-}
-
-.p-register-category div {
-   margin-right: 15px;
-   line-height: 36px;
-}
-
-/*Button*/
+/*---------------------------------
+  c-button ボタン
+---------------------------------*/
+/* ボタン共通 */
 button {
 	height: 32px;
 	border: 0px none;
@@ -141,36 +117,90 @@ button:hover {
 	opacity: 0.8;
 }
 
-.c-button-new-register {
+/* ボタン_新しい商品を登録 */
+.c-button-new__register {
 	margin-bottom: 16px;
 	background-color: #6D7993;
 	height: 40px;
 }
 
-.c-button-new {
+/* ボタン_検索*/
+.c-button__search {
+    display: inline-block;
+	height: 32px;
+	margin-left: 10px;
+	padding: 0 20px;
+	background-color: #96858F;
+	border: 0px none;
+	border-radius: 5px;
+	color:  #fff;
+}
+
+/* ボタン_新規登録 */
+.c-button__new {
 	margin-bottom: 16px;
 	background-color: #6D7993;
 	height: 60px;
 	width: 180px;
 }
 
-.c-button-detail {
+/* ボタン_登録変更 */
+.c-button__registrationedit {
+	margin-bottom: 16px;
+	background-color: #6D7993;
+	height: 60px;
+	width: 180px;
+}
+
+/* ボタン_詳細 */
+.c-button__detail {
 	background-color: #6D7993;
 	margin: 0 10px;
 }
 
-.c-button-edit {
+/* ボタン_更新 */
+.c-button__edit {
 	background-color: #96858F;
 	margin: 0 10px;
 }
 
-.c-button-delete {
+/* ボタン_削除 */
+.c-button__delete {
 	background-color: #9099a2;
 	margin: 0 10px;
 }
 
-.c-button-back {
+/* ボタン_一覧に戻る */
+.c-button__back {
 	margin-top: 40px;
     background-color: #96858F;
     height: 40px;
+}
+
+/*---------------------------------
+  c-input 
+---------------------------------*/
+/* label_ラベル */
+.c-input__label {
+	display: block;
+	font-size: 16px;
+	width: 100px;
+	margin-right: 20px;
+	background-color: #9099a2;
+	border-radius: 5px;
+	text-align: center;
+	color: #fff;
+	padding: 6px 0;
+}
+
+/* input_テキスト入力 */
+.c-input__text {
+	width: 320px;
+	padding-left: 10px;
+}
+
+/* input_チェックボックス */
+.c-input__checkbox {
+	width: 20px;
+	margin-right: 5px;
 }

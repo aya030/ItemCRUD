@@ -9,15 +9,15 @@
 </head>
 
 <body>
-	<header>
+	<header class="l-header">
 		<h1>AyaDesign</h1>
 	</header>
 
-	<main>
+	<main class="l-main">
 		<!-- エラー内容を表示 -->
 		<h2 th:text="${status} + ' ' + ${error}"></h2>
 		<p>404エラーの専用ページです</p>
-		<button class="c-button-back" type="button" onclick="history.back()">
+		<button class="c-button__back" type="button" onclick="history.back()">
 			一覧画面に戻る
 		</button>
 	</main>
