@@ -24,7 +24,7 @@ import com.example.demo.service.ItemService;
 @Controller
 @RequestMapping("/items")
 public class ItemController {
-	
+
 	private final ItemService itemService;
 
 	@Autowired
@@ -128,6 +128,16 @@ public class ItemController {
 	public String missingPathVariableExceptionHandler(Model model) {
 		model.addAttribute("status", "500エラー");
 		model.addAttribute("error", "MissingPathVariableException");
+		model.addAttribute("message", "IDが不正です");
+
+		return "error";
+	}
+
+	/* 変更・削除ボタンのIDがない時 */
+	@ExceptionHandler(NumberFormatException.class)
+	public String NumberFormatExceptionHandler(Model model) {
+		model.addAttribute("status", "400エラー");
+		model.addAttribute("error", "NumberFormatException");
 		model.addAttribute("message", "IDが不正です");
 
 		return "error";
