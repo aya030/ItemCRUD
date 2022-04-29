@@ -6,8 +6,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MissingPathVariableException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -110,5 +113,39 @@ public class ItemController {
 	public String delete(@PathVariable("id") int id) {
 		itemService.deleteOne(id);
 		return "redirect:/items/index";
+	}
+
+	/*
+	 * 例外処理 -----------------
+	 */
+
+	/* /detail/{id}のIDがない時 */
+	@ExceptionHandler(MissingPathVariableException.class)
+	public String missingPathVariableExceptionHandler(Model model) {
+		model.addAttribute("status", "500エラー");
+		model.addAttribute("error", "MissingPathVariableException");
+		model.addAttribute("message", "IDが不正です");
+
+		return "error";
+	}
+
+	/* 検索が空の時 */
+	@ExceptionHandler(NullPointerException.class)
+	public String NullPointerExceptionHandler(Model model) {
+		model.addAttribute("status", "500エラー");
+		model.addAttribute("error", "NullPointerException");
+		model.addAttribute("message", "IDが不正です");
+
+		return "error";
+	}
+
+	/* 検索が空の時 */
+	@ExceptionHandler(BindException.class)
+	public String bindExceptionnHandler(Model model) {
+		model.addAttribute("status", "400エラー");
+		model.addAttribute("error", "BindException");
+		model.addAttribute("message", "IDが不正です。数字を入力してください");
+
+		return "error";
 	}
 }
