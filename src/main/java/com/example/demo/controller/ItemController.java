@@ -24,9 +24,13 @@ import com.example.demo.service.ItemService;
 @Controller
 @RequestMapping("/items")
 public class ItemController {
+	
+	private final ItemService itemService;
 
 	@Autowired
-	ItemService itemService;
+	public ItemController(ItemService itemService) {
+		this.itemService = itemService;
+	}
 
 	/* Top */
 	@RequestMapping("/index")
