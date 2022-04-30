@@ -4,7 +4,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Item;
@@ -14,7 +13,6 @@ import com.example.demo.repository.ItemMapper;
 public class ItemService {
 	private final ItemMapper itemMapper;
 
-	@Autowired
 	public ItemService(ItemMapper itemMapper) {
 		this.itemMapper = itemMapper;
 	}

@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
@@ -27,7 +26,6 @@ public class ItemController {
 
 	private final ItemService itemService;
 
-	@Autowired
 	public ItemController(ItemService itemService) {
 		this.itemService = itemService;
 	}
