@@ -31,7 +31,7 @@ public class ItemController {
 	}
 
 	/* Top */
-	@RequestMapping("/index")
+	@GetMapping("/index")
 	public String index(ItemForm itemForm, Model model) {
 
 		model.addAttribute("title", "商品APP_一覧画面");
