@@ -47,7 +47,7 @@
              category = #{category},
              num = #{num} 
      WHERE   id = #{id}
-  </update>
+    </update>
 	<delete id="deleteOne">
      DELETE FROM
         itemtable

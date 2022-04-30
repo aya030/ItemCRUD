@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,21 +49,21 @@ public class ItemController {
 		model.addAttribute("title", "商品APP_検索結果");
 		model.addAttribute("logo", "AyaDesign");
 
-		Item item = itemService.findById(itemForm.getId());
-		model.addAttribute("item", item);
+		Optional<Item> item = itemService.findById(itemForm.getId());
+		model.addAttribute("item", item.get());
 
 		return "items/search";
 	}
 
 	/* 詳細 */
 	@GetMapping("/detail/id={id}")
-	public String detail(ItemForm itemForm, @PathVariable("id") Integer id, Model model) {
+	public String detail(@PathVariable("id") Integer id, Model model) {
 
 		model.addAttribute("title", "商品APP_商品詳細");
 		model.addAttribute("logo", "AyaDesign");
 
-		Item item = itemService.findById(id);
-		model.addAttribute("item", item);
+		Optional<Item> item = itemService.findById(id);
+		model.addAttribute("item", item.get());
 
 		return "items/detail";
 	}
@@ -97,7 +98,7 @@ public class ItemController {
 		model.addAttribute("title", "商品APP_更新");
 		model.addAttribute("logo", "AyaDesign");
 
-		model.addAttribute("item", itemService.findById(id));
+		model.addAttribute("item", itemService.findById(id).get());
 		Map<String, String> radioCategory;
 		radioCategory = itemService.initRadioCategory();
 		model.addAttribute("radioCategory", radioCategory);
@@ -141,15 +142,15 @@ public class ItemController {
 		return "error";
 	}
 
-	/* 検索が空の時 */
-	@ExceptionHandler(NullPointerException.class)
-	public String NullPointerExceptionHandler(Model model) {
-		model.addAttribute("status", "500エラー");
-		model.addAttribute("error", "NullPointerException");
-		model.addAttribute("message", "IDが不正です");
-
-		return "error";
-	}
+//	/* 検索が空の時 */
+//	@ExceptionHandler(NullPointerException.class)
+//	public String NullPointerExceptionHandler(Model model) {
+//		model.addAttribute("status", "500エラー");
+//		model.addAttribute("error", "NullPointerException");
+//		model.addAttribute("message", "IDが不正です");
+//
+//		return "error";
+//	}
 
 	/* 検索がID(数字）以外の時 */
 	@ExceptionHandler(BindException.class)

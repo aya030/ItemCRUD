@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,14 @@ public class ItemService {
 	}
 
 	// 1件検索
-	public Item findById(Integer id) {
-		return itemMapper.findById(id);
+	public Optional<Item> findById(Integer id) {
+		Optional<Item> opt = itemMapper.findById(id);
+		if (opt.isPresent()) {
+			return itemMapper.findById(id);
+		} else {
+			return opt;
+			// nullの場合
+		}
 	}
 
 	// 全件取得
@@ -33,7 +40,7 @@ public class ItemService {
 	}
 
 	// 更新
-	public void updateOne(int id, String name, int price, String category, int num) {
+	public void updateOne(Integer id, String name, int price, String category, int num) {
 		itemMapper.updateOne(id, name, price, category, num);
 	}
 
