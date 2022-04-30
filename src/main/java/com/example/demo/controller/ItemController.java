@@ -50,7 +50,11 @@ public class ItemController {
 		model.addAttribute("logo", "AyaDesign");
 
 		Optional<Item> item = itemService.findById(itemForm.getId());
-		model.addAttribute("item", item.get());
+		if (item.isPresent()) {
+			model.addAttribute("item", item.get());
+		} else {
+			model.addAttribute("message", "検索結果が0件でした");
+		}
 
 		return "items/search";
 	}

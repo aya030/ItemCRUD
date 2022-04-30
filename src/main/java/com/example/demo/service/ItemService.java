@@ -20,13 +20,7 @@ public class ItemService {
 
 	// 1件検索
 	public Optional<Item> findById(Integer id) {
-		Optional<Item> opt = itemMapper.findById(id);
-		if (opt.isPresent()) {
-			return itemMapper.findById(id);
-		} else {
-			return opt;
-			// nullの場合
-		}
+		return itemMapper.findById(id);
 	}
 
 	// 全件取得
