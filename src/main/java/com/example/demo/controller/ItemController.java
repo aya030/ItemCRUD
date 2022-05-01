@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
@@ -142,15 +143,15 @@ public class ItemController {
 		return "error";
 	}
 
-//	/* 検索が空の時 */
-//	@ExceptionHandler(NullPointerException.class)
-//	public String NullPointerExceptionHandler(Model model) {
-//		model.addAttribute("status", "500エラー");
-//		model.addAttribute("error", "NullPointerException");
-//		model.addAttribute("message", "IDが不正です");
-//
-//		return "error";
-//	}
+	/* 検索が空の時 */
+	@ExceptionHandler(NoSuchElementException.class)
+	public String NoSuchElementExceptionHandler(Model model) {
+		model.addAttribute("status", "500エラー");
+		model.addAttribute("error", "NoSuchElementException");
+		model.addAttribute("message", "IDが入力されていません");
+
+		return "error";
+	}
 
 	/* 検索がID(数字）以外の時 */
 	@ExceptionHandler(BindException.class)

@@ -24,8 +24,7 @@ public class ItemService {
 		if (opt.isPresent()) {
 			return itemMapper.findById(id);
 		} else {
-			return opt;
-			// nullの場合
+			return Optional.empty();
 		}
 	}
 
