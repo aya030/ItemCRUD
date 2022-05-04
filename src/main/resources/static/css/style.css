@@ -90,12 +90,24 @@ table th {
 	margin-bottom: 16px;
 }
 
+.p-register__input-container span {
+	font-size: 14px;
+	color: red;
+	margin-top: 5px;
+	margin-left: 15px;
+}
+
+.p-register__input-container span:before {
+	content: "*";
+	margin-right: 3px;
+}
+
 .p-register__input-container:last-of-type{
 	margin-bottom: 40px;
 }
 
 .p-register__category-container {
-	margin-right: 15px;
+	margin-right: 18px;
     line-height: 36px;
 }
 
@@ -172,9 +184,21 @@ button:hover {
 
 /* ボタン_一覧に戻る */
 .c-button__back {
-	margin-top: 40px;
-    background-color: #96858F;
-    height: 40px;
+	display: block;
+	margin-top: 20px;
+	width: 140px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 14px;
+	color: #6D7993;
+	background-color: #fff;
+	border: 1px solid #6D7993;
+	border-radius: 3px;
+}
+
+.c-button__back:hover {
+	opacity: 0.8;
 }
 
 /*---------------------------------

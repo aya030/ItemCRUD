@@ -19,28 +19,32 @@
 			<div class="p-register__input-container">
 				<label class="c-input__label" for="name">商品名</label>
 				<input class="c-input__text" id="name" type="text" th:field="*{name}">
+				<span class="c-span__error" th:errors="*{name}"></span>
 			</div>
 			<div class="p-register__input-container">
 				<label class="c-input__label" for="price">価格</label>
 				<input class="c-input__text" id="price" type="text" th:field="*{price}">
+				<span class="c-span__error" th:errors="*{price}"></span>
 			</div>
 			<div class="p-register__input-container">
 				<label class="c-input__label" for="category">カテゴリー</label>
 				<div th:each="item : ${radioCategory}" class="form-check-inline">
 					<div class="p-register__category-container">
 						<input id="category" type="radio" class="form-check-input c-input__checkbox"
-							th:text="${item.value}" th:value="${item.value}" 　th:field="*{category}">
+							th:text="${item.value}" th:value="${item.value}" th:field="*{category}">
 					</div>
 				</div>
+				<span class="c-span__error" th:errors="*{category}"></span>
 			</div>
 			<div class="p-register__input-container">
 				<label class="c-input__label" for="num">数量</label>
 				<input class="c-input__text" id="num" type="text" th:field="*{num}">
+				<span class="c-span__error" th:errors="*{num}"></span>
 			</div>
 
 			<button class="c-button__new">新規登録</button>
 		</form>
-		<button class="c-button__back" type="button" onclick="history.back()">一覧画面に戻る</button>
+		<a href="/items/index" class="c-button__back">一覧画面に戻る</a>
 	</main>
 </body>
 

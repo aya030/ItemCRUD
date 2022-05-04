@@ -19,10 +19,12 @@
 			<div class="p-register__input-container">
 				<label class="c-input__label" for="name">商品名</label>
 				<input class="c-input__text" id="name" type="text" th:field="*{name}">
+				<span class="c-span__error" th:errors="*{name}"></span>
 			</div>
 			<div class="p-register__input-container">
 				<label class="c-input__label" for="price">価格</label>
 				<input class="c-input__text" id="price" type="text" th:field="*{price}">
+				<span class="c-span__error" th:errors="*{price}"></span>
 			</div>
 			<div class="p-register__input-container">
 				<label class="c-input__label" for="category">カテゴリー</label>
@@ -36,11 +38,12 @@
 			<div class="p-register__input-container">
 				<label class="c-input__label" for="num">数量</label>
 				<input class="c-input__text" id="num" type="text" th:field="*{num}">
+				<span class="c-span__error" th:errors="*{num}"></span>
 			</div>
 
 			<button class="c-button__registrationedit">登録変更</button>
 		</form>
-		<button class="c-button__back" type="button" onclick="history.back()">一覧画面に戻る</button>
+		<a href="/items/index" class="c-button__back">一覧画面に戻る</a>
 	</main>
 </body>
 

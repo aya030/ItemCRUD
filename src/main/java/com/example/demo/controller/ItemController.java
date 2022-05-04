@@ -87,8 +87,14 @@ public class ItemController {
 	}
 
 	@PostMapping("/new")
-	public String create(@Validated @ModelAttribute Item item, BindingResult result) {
+	public String create(Model model, @Validated @ModelAttribute Item item, BindingResult result) {
+
 		if (result.hasErrors()) {
+			model.addAttribute("title", "商品APP_新規登録");
+			model.addAttribute("logo", "AyaDesign");
+			Map<String, String> radioCategory;
+			radioCategory = itemService.initRadioCategory();
+			model.addAttribute("radioCategory", radioCategory);
 			return "items/new";
 		}
 		itemService.insertOne(item);
@@ -110,7 +116,17 @@ public class ItemController {
 	}
 
 	@PostMapping("/edit/id={id}")
-	public String update(@ModelAttribute Item item) {
+	public String update(Model model, @Validated @ModelAttribute Item item, BindingResult result) {
+		
+		if (result.hasErrors()) {
+			model.addAttribute("title", "商品APP_更新");
+			model.addAttribute("logo", "AyaDesign");
+			
+			Map<String, String> radioCategory;
+			radioCategory = itemService.initRadioCategory();
+			model.addAttribute("radioCategory", radioCategory);
+			return "items/new";
+		}
 		itemService.updateOne(item.getId(), item.getName(), item.getPrice(), item.getCategory(), item.getNum());
 		return "redirect:/items/index";
 	}
