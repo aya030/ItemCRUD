@@ -59,7 +59,7 @@ public class ItemController {
 			List<Item> itemList = itemService.getItemList();
 			model.addAttribute("itemList", itemList);
 			
-			model.addAttribute("message", "*検索結果が0件でした");
+			model.addAttribute("message", "* 検索結果が0件でした");
 			return "index";
 		}
 	}
@@ -169,10 +169,13 @@ public class ItemController {
 
 	/* 検索がID(数字）以外の時 */
 	@ExceptionHandler(BindException.class)
-	public String bindExceptionnHandler(Model model) {
-		model.addAttribute("status", "400エラー");
-		model.addAttribute("error", "BindException");
-		model.addAttribute("message", "IDが不正です。数字を入力してください");
-		return "error";
+	public String bindExceptionHandler(Model model) {
+		model.addAttribute("title", "商品APP_一覧画面");
+		model.addAttribute("logo", "AyaDesign");
+		List<Item> itemList = itemService.getItemList();
+		model.addAttribute("itemList", itemList);
+		
+		model.addAttribute("message", "* IDが不正です。数字を入力してください");
+		return "index";
 	}
 }
