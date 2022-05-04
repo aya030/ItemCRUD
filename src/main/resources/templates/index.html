@@ -17,7 +17,9 @@
 		<form class="p-index__form" action="search" method="get">
 			<label>ID:<input class="p-index__input" type="search" name="id"></label>
 			<div><input class="c-button__search" type="submit" value="検索" /></div>
+		    <span class="p-index__errormessage" th:text=${message}></span>
 		</form>
+		
 		<a th:href="@{/items/new}">
 			<button class="c-button-new__register">新しい商品を登録</button>
 		</a>

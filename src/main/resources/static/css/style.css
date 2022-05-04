@@ -72,7 +72,8 @@ table th {
 ---------------------------------*/
 .p-index__form {
 	display: flex;
-	margin-bottom: 32px;
+	position: relative;
+	margin-bottom: 60px;
 }
 
 .p-index__input {
@@ -80,6 +81,17 @@ table th {
 	width: 240px;
 	height: 32px;
 	margin-left: 20px;
+}
+
+.p-index__errormessage {
+	position: absolute;
+	bottom: -90%;
+	left: 30px;
+	margin-left: 15px;
+    line-height: 32px;
+	font-size: 14px;
+	color: #C63720;
+	line-height: 32px;
 }
 
 /*---------------------------------

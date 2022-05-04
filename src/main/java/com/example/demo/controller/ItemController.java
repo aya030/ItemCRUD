@@ -54,8 +54,13 @@ public class ItemController {
 			model.addAttribute("item", item.get());
 			return "items/search";
 		} else {
-			model.addAttribute("message", "検索結果が0件でした");
-			return "redirect:/items/index";
+			model.addAttribute("title", "商品APP_一覧画面");
+			model.addAttribute("logo", "AyaDesign");
+			List<Item> itemList = itemService.getItemList();
+			model.addAttribute("itemList", itemList);
+			
+			model.addAttribute("message", "*検索結果が0件でした");
+			return "index";
 		}
 	}
 
