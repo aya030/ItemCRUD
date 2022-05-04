@@ -20,11 +20,11 @@ public class ItemService {
 
 	// 1件検索
 	public Optional<Item> findById(Integer id) {
-		Optional<Item> opt = itemMapper.findById(id);
-		if (opt.isPresent()) {
-			return itemMapper.findById(id);
-		} else {
-			return Optional.empty();
+		try {
+			Optional<Item> optionalId = itemMapper.findById(id);
+			return optionalId;
+		} catch (Exception e) {
+			return null;
 		}
 	}
 
@@ -56,5 +56,4 @@ public class ItemService {
 		radio.put("2", "ネックレス");
 		return radio;
 	}
-
 }

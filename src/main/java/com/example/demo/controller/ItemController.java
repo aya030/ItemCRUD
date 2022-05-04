@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
@@ -51,9 +50,13 @@ public class ItemController {
 		model.addAttribute("logo", "AyaDesign");
 
 		Optional<Item> item = itemService.findById(itemForm.getId());
-		model.addAttribute("item", item.get());
-
-		return "items/search";
+		if (item.isPresent()) {
+			model.addAttribute("item", item.get());
+			return "items/search";
+		} else {
+			model.addAttribute("message", "検索結果が0件でした");
+			return "redirect:/items/index";
+		}
 	}
 
 	/* 詳細 */
@@ -143,23 +146,12 @@ public class ItemController {
 		return "error";
 	}
 
-	/* 検索が空の時 */
-	@ExceptionHandler(NoSuchElementException.class)
-	public String NoSuchElementExceptionHandler(Model model) {
-		model.addAttribute("status", "500エラー");
-		model.addAttribute("error", "NoSuchElementException");
-		model.addAttribute("message", "IDが入力されていません");
-
-		return "error";
-	}
-
 	/* 検索がID(数字）以外の時 */
 	@ExceptionHandler(BindException.class)
 	public String bindExceptionnHandler(Model model) {
 		model.addAttribute("status", "400エラー");
 		model.addAttribute("error", "BindException");
 		model.addAttribute("message", "IDが不正です。数字を入力してください");
-
 		return "error";
 	}
 }
