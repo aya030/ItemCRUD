@@ -124,6 +124,23 @@ table th {
 }
 
 /*---------------------------------
+  p-error(404.html)
+---------------------------------*/
+.p-error__form {
+	display: flex;
+	position: relative;
+	margin-top: 60px;
+	margin-bottom: 60px;
+}
+
+.p-error__input {
+	display: inline-block;
+	width: 240px;
+	height: 32px;
+	margin-left: 20px;
+}
+
+/*---------------------------------
   c-button ボタン
 ---------------------------------*/
 /* ボタン共通 */

@@ -56,11 +56,8 @@ public class ItemController {
 		} else {
 			model.addAttribute("title", "商品APP_一覧画面");
 			model.addAttribute("logo", "AyaDesign");
-			List<Item> itemList = itemService.getItemList();
-			model.addAttribute("itemList", itemList);
-			
-			model.addAttribute("message", "* 検索結果が0件でした");
-			return "index";
+
+			return "error/404";
 		}
 	}
 
@@ -122,11 +119,11 @@ public class ItemController {
 
 	@PostMapping("/edit/id={id}")
 	public String update(Model model, @Validated @ModelAttribute Item item, BindingResult result) {
-		
+
 		if (result.hasErrors()) {
 			model.addAttribute("title", "商品APP_更新");
 			model.addAttribute("logo", "AyaDesign");
-			
+
 			Map<String, String> radioCategory;
 			radioCategory = itemService.initRadioCategory();
 			model.addAttribute("radioCategory", radioCategory);
@@ -140,7 +137,11 @@ public class ItemController {
 	@PostMapping("/delete/id={id}")
 	public String delete(@PathVariable("id") int id) {
 		itemService.deleteOne(id);
-		return "redirect:/items/index";
+		try {
+			return "redirect:/items/index";
+		} catch (NumberFormatException e) {
+			return "items/index";
+		}
 	}
 
 	/*
@@ -160,7 +161,7 @@ public class ItemController {
 	/* 変更・削除ボタンのIDがない時 */
 	@ExceptionHandler(NumberFormatException.class)
 	public String NumberFormatExceptionHandler(Model model) {
-		model.addAttribute("status", "400エラー");
+		model.addAttribute("status", "400エラーです");
 		model.addAttribute("error", "NumberFormatException");
 		model.addAttribute("message", "IDが不正です");
 
@@ -174,7 +175,7 @@ public class ItemController {
 		model.addAttribute("logo", "AyaDesign");
 		List<Item> itemList = itemService.getItemList();
 		model.addAttribute("itemList", itemList);
-		
+
 		model.addAttribute("message", "* IDが不正です。数字を入力してください");
 		return "index";
 	}

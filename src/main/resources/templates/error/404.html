@@ -15,8 +15,15 @@
 
 	<main class="l-main">
 		<!-- エラー内容を表示 -->
-		<h2 th:text="${status} + ' ' + ${error}"></h2>
-		<p>404エラーの専用ページです</p>
+		<h2>404 NOT FOUND</h2>
+		<p>ページが見つかりません。</p>
+		<p>あなたがお探しのページは<br>
+			移動もしくは削除された可能性があります。</p>
+
+		<form class="p-error__form" action="search" method="get">
+			<label>ID:<input class="p-error__input" type="search" name="id"></label>
+			<div><input class="c-button__search" type="submit" value="検索" /></div>
+		</form>
 		<a href="/items/index" class="c-button__back">一覧画面に戻る</a>
 	</main>
 </body>
