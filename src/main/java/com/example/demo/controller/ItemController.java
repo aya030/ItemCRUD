@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Item;
 import com.example.demo.form.ItemForm;
@@ -43,8 +44,9 @@ public class ItemController {
 	}
 
 	/* 検索結果 */
+	@SuppressWarnings("unlikely-arg-type")
 	@GetMapping("/search")
-	public String search(ItemForm itemForm, Model model) {
+	public String search(ItemForm itemForm, Model model, @RequestParam("id") String id) {
 
 		model.addAttribute("title", "商品APP_検索結果");
 		model.addAttribute("logo", "AyaDesign");
@@ -54,11 +56,21 @@ public class ItemController {
 			Item item = itemSearch.get();
 			model.addAttribute("item", item);
 			return "items/search";
-		} else {
+
+		} else if (itemForm.getId() == null || itemForm.getId().equals("")) {
 			model.addAttribute("title", "商品APP_一覧画面");
 			model.addAttribute("logo", "AyaDesign");
+			List<Item> itemList = itemService.getItemList();
+			model.addAttribute("itemList", itemList);
 
-			return "error/404";
+			model.addAttribute("message", "* IDを入力してください");
+
+			return "index";
+		} else {
+			model.addAttribute("title", "商品APP_一覧画面");
+			model.addAttribute("message", "* IDが" + id + "の商品は存在しません");
+
+			return "index";
 		}
 	}
 
