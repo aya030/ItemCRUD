@@ -10,6 +10,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MissingPathVariableException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -185,6 +186,17 @@ public class ItemController {
 		model.addAttribute("itemList", itemList);
 
 		model.addAttribute("message", "* IDが不正です。数字を入力してください");
+		return "index";
+	}
+
+	/* 400エラー対策 Searchの@RequestParamのパラメーターが存在しない場合の例外 */
+	@ExceptionHandler(MissingServletRequestParameterException.class)
+	public String MissingServletRequestParameterExceptionHandler(Model model) {
+		model.addAttribute("title", "商品APP_一覧画面");
+		model.addAttribute("logo", "AyaDesign");
+		List<Item> itemList = itemService.getItemList();
+		model.addAttribute("itemList", itemList);
+
 		return "index";
 	}
 }
