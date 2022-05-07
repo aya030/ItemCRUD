@@ -8,7 +8,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Item;
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.ItemMapper;
 
 @Service
@@ -21,12 +20,7 @@ public class ItemService {
 
 	// 1件検索
 	public Optional<Item> findById(Integer id) {
-		try {
-			Optional<Item> optionalId = itemMapper.findById(id);
-			return optionalId;
-		} catch (ResourceNotFoundException e) {
-			return null;
-		}
+		return itemMapper.findById(id);
 	}
 
 	// 全件取得

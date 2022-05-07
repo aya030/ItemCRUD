@@ -49,7 +49,7 @@ public class ItemController {
 		model.addAttribute("title", "商品APP_検索結果");
 		model.addAttribute("logo", "AyaDesign");
 
-		Optional<Item> itemSearch = itemService.findById(itemForm.getId());	
+		Optional<Item> itemSearch = itemService.findById(itemForm.getId());
 		if (itemSearch.isPresent()) {
 			Item item = itemSearch.get();
 			model.addAttribute("item", item);
