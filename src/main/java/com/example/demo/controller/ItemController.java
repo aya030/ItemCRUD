@@ -49,7 +49,7 @@ public class ItemController {
 		model.addAttribute("title", "商品APP_検索結果");
 		model.addAttribute("logo", "AyaDesign");
 
-		Optional<Item> itemSearch = itemService.findById(itemForm.getId());	
+		Optional<Item> itemSearch = itemService.findById(itemForm.getId());
 		if (itemSearch.isPresent()) {
 			Item item = itemSearch.get();
 			model.addAttribute("item", item);
@@ -138,11 +138,7 @@ public class ItemController {
 	@PostMapping("/delete/id={id}")
 	public String delete(@PathVariable("id") int id) {
 		itemService.deleteOne(id);
-		try {
-			return "redirect:/items/index";
-		} catch (NumberFormatException e) {
-			return "items/index";
-		}
+		return "redirect:/items/index";
 	}
 
 	/*
