@@ -22,9 +22,4 @@ public class Item {
 	@NotNull(message = "1桁以上の数値を入力してください")
 	private Integer num;
 
-	public boolean isPresent() {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
-	}
-
 }
