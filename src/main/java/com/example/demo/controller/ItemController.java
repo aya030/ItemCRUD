@@ -96,8 +96,7 @@ public class ItemController {
 		if (result.hasErrors()) {
 			model.addAttribute("title", "商品APP_新規登録");
 			model.addAttribute("logo", "AyaDesign");
-			Map<String, String> radioCategory;
-			radioCategory = itemService.initRadioCategory();
+			Map<String, String> radioCategory = itemService.initRadioCategory();
 			model.addAttribute("radioCategory", radioCategory);
 			return "items/new";
 		}
