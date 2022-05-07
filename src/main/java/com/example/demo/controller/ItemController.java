@@ -49,9 +49,10 @@ public class ItemController {
 		model.addAttribute("title", "商品APP_検索結果");
 		model.addAttribute("logo", "AyaDesign");
 
-		Optional<Item> item = itemService.findById(itemForm.getId());
-		if (item.isPresent()) {
-			model.addAttribute("item", item.get());
+		Optional<Item> itemSearch = itemService.findById(itemForm.getId());	
+		if (itemSearch.isPresent()) {
+			Item item = itemSearch.get();
+			model.addAttribute("item", item);
 			return "items/search";
 		} else {
 			model.addAttribute("title", "商品APP_一覧画面");
