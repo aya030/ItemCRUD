@@ -69,8 +69,9 @@ public class ItemController {
 		model.addAttribute("title", "商品APP_商品詳細");
 		model.addAttribute("logo", "AyaDesign");
 
-		Optional<Item> item = itemService.findById(id);
-		model.addAttribute("item", item.get());
+		Optional<Item> itemSearch = itemService.findById(id);
+		Item item = itemSearch.get();
+		model.addAttribute("item", item);
 
 		return "items/detail";
 	}
@@ -125,8 +126,7 @@ public class ItemController {
 			model.addAttribute("title", "商品APP_更新");
 			model.addAttribute("logo", "AyaDesign");
 
-			Map<String, String> radioCategory;
-			radioCategory = itemService.initRadioCategory();
+			Map<String, String> radioCategory = itemService.initRadioCategory();
 			model.addAttribute("radioCategory", radioCategory);
 			return "items/new";
 		}
