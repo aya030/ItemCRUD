@@ -59,12 +59,13 @@ public class ItemController {
 			return "items/search";
 
 		} else if (itemForm.getId() == null || itemForm.getId().equals("")) {
+			// inputの中身が空の時
 			model.addAttribute("title", "商品APP_一覧画面");
 			model.addAttribute("logo", "AyaDesign");
 			List<Item> itemList = itemService.getItemList();
 			model.addAttribute("itemList", itemList);
 
-			model.addAttribute("message", "* IDを入力してください");
+			model.addAttribute("message", "* 入力の値がありません。IDを入力してください");
 
 			return "index";
 		} else {
