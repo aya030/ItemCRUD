@@ -98,15 +98,17 @@ table th {
   p-register(new.html,edit.html)
 ---------------------------------*/
 .p-register__input-container {
+	position: relative;
 	display: flex;
-	margin-bottom: 16px;
+	margin-bottom: 40px;
 }
 
 .p-register__input-container span {
+	position: absolute;
+	bottom: -24px;
+	left: 140px;
 	font-size: 14px;
 	color: red;
-	margin-top: 5px;
-	margin-left: 15px;
 }
 
 .p-register__input-container span:before {
@@ -237,7 +239,7 @@ button:hover {
 .c-input__label {
 	display: block;
 	font-size: 16px;
-	width: 100px;
+	width: 120px;
 	margin-right: 20px;
 	background-color: #9099a2;
 	border-radius: 5px;
