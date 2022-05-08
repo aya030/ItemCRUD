@@ -84,10 +84,15 @@ public class ItemController {
 		model.addAttribute("logo", "AyaDesign");
 
 		Optional<Item> itemSearch = itemService.findById(id);
-		Item item = itemSearch.get();
-		model.addAttribute("item", item);
+		if (itemSearch.isPresent()) {
+			Item item = itemSearch.get();
+			model.addAttribute("item", item);
 
-		return "items/detail";
+			return "items/detail";
+		} else {
+			
+			return "error/404";
+		}
 	}
 
 	/* 新規商品登録 */
@@ -132,7 +137,7 @@ public class ItemController {
 			Map<String, String> radioCategory;
 			radioCategory = itemService.initRadioCategory();
 			model.addAttribute("radioCategory", radioCategory);
-			
+
 			return "items/edit";
 		} else {
 			model.addAttribute("title", "商品APP_更新");
