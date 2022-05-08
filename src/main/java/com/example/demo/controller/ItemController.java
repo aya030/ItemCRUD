@@ -122,14 +122,26 @@ public class ItemController {
 	@GetMapping("/edit/id={id}")
 	public String edit(@PathVariable("id") int id, Model model) {
 
-		model.addAttribute("title", "商品APP_更新");
-		model.addAttribute("logo", "AyaDesign");
+		Optional<Item> itemSearch = itemService.findById(id);
+		if (itemSearch.isPresent()) {
+			Item item = itemService.findById(id).get();
+			model.addAttribute("title", "商品APP_更新");
+			model.addAttribute("logo", "AyaDesign");
 
-		model.addAttribute("item", itemService.findById(id).get());
-		Map<String, String> radioCategory;
-		radioCategory = itemService.initRadioCategory();
-		model.addAttribute("radioCategory", radioCategory);
-		return "items/edit";
+			model.addAttribute("item", item);
+			Map<String, String> radioCategory;
+			radioCategory = itemService.initRadioCategory();
+			model.addAttribute("radioCategory", radioCategory);
+			
+			return "items/edit";
+		} else {
+			model.addAttribute("title", "商品APP_更新");
+			model.addAttribute("logo", "AyaDesign");
+			List<Item> itemList = itemService.getItemList();
+			model.addAttribute("itemList", itemList);
+
+			return "index";
+		}
 	}
 
 	@PostMapping("/edit/id={id}")
