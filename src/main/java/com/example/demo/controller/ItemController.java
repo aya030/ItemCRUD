@@ -137,10 +137,8 @@ public class ItemController {
 		} else {
 			model.addAttribute("title", "商品APP_更新");
 			model.addAttribute("logo", "AyaDesign");
-			List<Item> itemList = itemService.getItemList();
-			model.addAttribute("itemList", itemList);
 
-			return "index";
+			return "error/404";
 		}
 	}
 
