@@ -90,7 +90,7 @@ public class ItemController {
 
 			return "items/detail";
 		} else {
-			
+
 			return "error/404";
 		}
 	}
@@ -148,18 +148,24 @@ public class ItemController {
 	}
 
 	@PostMapping("/edit/id={id}")
-	public String update(Model model, @Validated @ModelAttribute Item item, BindingResult result) {
-
+	public String update(@PathVariable("id") int id, Model model, @Validated @ModelAttribute Item item,
+			BindingResult result) {
+		Optional<Item> itemSearch = itemService.findById(id);
 		if (result.hasErrors()) {
 			model.addAttribute("title", "商品APP_更新");
 			model.addAttribute("logo", "AyaDesign");
 
 			Map<String, String> radioCategory = itemService.initRadioCategory();
 			model.addAttribute("radioCategory", radioCategory);
-			return "items/new";
+			return "items/edit";
+		} else if (itemSearch.isPresent()) {
+			Item item2 = itemService.findById(id).get();
+			model.addAttribute("item", item2);
+			itemService.updateOne(item.getId(), item.getName(), item.getPrice(), item.getCategory(), item.getNum());
+			return "redirect:/items/index";
+		} else {
+			return "error/404";
 		}
-		itemService.updateOne(item.getId(), item.getName(), item.getPrice(), item.getCategory(), item.getNum());
-		return "redirect:/items/index";
 	}
 
 	/* 削除 */
