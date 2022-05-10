@@ -3,8 +3,8 @@ package com.example.demo.service;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Item;
@@ -12,15 +12,15 @@ import com.example.demo.repository.ItemMapper;
 
 @Service
 public class ItemService {
+	private final ItemMapper itemMapper;
 
-	@Autowired
-	ItemMapper itemMapper;
+	public ItemService(ItemMapper itemMapper) {
+		this.itemMapper = itemMapper;
+	}
 
 	// 1件検索
-	public Item findById(Integer id) {
-		Item item = new Item();
-		item.setId(id);
-		return itemMapper.findById(item);
+	public Optional<Item> findById(Integer id) {
+		return itemMapper.findById(id);
 	}
 
 	// 全件取得
@@ -34,13 +34,13 @@ public class ItemService {
 	}
 
 	// 更新
-	public void updateOne(int id, String name, int price, String category, int num) {
+	public void updateOne(Integer id, String name, int price, String category, int num) {
 		itemMapper.updateOne(id, name, price, category, num);
 	}
 
 	// 削除
-	public void deleteOne(Item item) {
-		itemMapper.deleteOne(item);
+	public void deleteOne(int id) {
+		itemMapper.deleteOne(id);
 	}
 
 	// ラジオボタン(新規登録・更新)
@@ -51,5 +51,4 @@ public class ItemService {
 		radio.put("2", "ネックレス");
 		return radio;
 	}
-
 }

@@ -9,10 +9,10 @@
 </head>
 
 <body>
-	<header>
+	<header class="l-header">
 		<h1 th:text="${logo}"></h1>
 	</header>
-	<main>
+	<main class="l-main">
 		<h2>商品詳細ページ</h2>
 
 		<div th:if="${item} !=null" th:object="${item}">
@@ -31,18 +31,18 @@
 					<td th:text="*{price}">価格</td>
 					<td th:text="*{category}">カテゴリー</td>
 					<td th:text="*{num}">数量</td>
-					<td class="table-td">
-						<a th:href="@{/items/edit/id={id}(id=*{id})}"><button class="c-button-edit">変更</button></a>
+					<td class="c-table__lasttd">
+						<a th:href="@{/items/edit/id={id}(id=*{id})}"><button class="c-button__edit">変更</button></a>
 
 						<form th:method="post" th:action="@{/items/delete/id={id}(id=*{id})}">
-							<button class="c-button-delete">削除</button>
+							<button class="c-button__delete">削除</button>
 						</form>
 					</td>
 
 				</tr>
 			</table>
 		</div>
-		<button class="c-button-back" type="button" onclick="history.back()">一覧画面に戻る</button>
+		<button class="c-button__back" type="button" onclick="history.back()">一覧画面に戻る</button>
 	</main>
 </body>
 

@@ -9,18 +9,19 @@
 </head>
 
 <body>
-	<header>
+	<header class="l-header">
 		<h1 th:text="${logo}"></h1>
 	</header>
-	<main class="l-index">
+	<main class="l-index l-main">
 		<h2>商品一覧</h2>
-		<form class="p-index-form" action="search" method="get">
-			<label>ID:<input class="input" type="search" name="id"></label>
-			<div><input class="search" type="submit" value="検索" /></div>
+		<form class="p-index__form" action="search" method="get">
+			<label>ID:<input class="p-index__input" type="search" name="id"></label>
+			<div><input class="c-button__search" type="submit" value="検索" /></div>
+		    <span class="p-index__errormessage" th:text=${message}></span>
 		</form>
-
+		
 		<a th:href="@{/items/new}">
-			<button class="c-button-new-register">新しい商品を登録</button>
+			<button class="c-button-new__register">新しい商品を登録</button>
 		</a>
 
 		<div th:if="${itemList} !=null">
@@ -39,12 +40,12 @@
 					<td th:text="*{price}">価格</td>
 					<td th:text="*{category}">カテゴリー</td>
 					<td th:text="*{num}">数量</td>
-					<td class="table-td">
-						<a th:href="@{/items/detail/id={id}(id=*{id})}"><button class="c-button-detail">詳細</button></a>
-						<a th:href="@{/items/edit/id={id}(id=*{id})}"><button class="c-button-edit">変更</button></a>
+					<td class="c-table__lasttd">
+						<a th:href="@{/items/detail/id={id}(id=*{id})}"><button class="c-button__detail">詳細</button></a>
+						<a th:href="@{/items/edit/id={id}(id=*{id})}"><button class="c-button__edit">変更</button></a>
 
 						<form th:method="post" th:action="@{/items/delete/id={id}(id=*{id})}">
-							<button class="c-button-delete">削除</button>
+							<button class="c-button__delete">削除</button>
 						</form>
 					</td>
 				</tr>

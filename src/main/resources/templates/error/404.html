@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>404error</title>
+	<link href="/css/style.css" rel="stylesheet">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<header class="l-header">
+		<h1>AyaDesign</h1>
+	</header>
+
+	<main class="l-main">
+		<!-- エラー内容を表示 -->
+		<h2>404 NOT FOUND</h2>
+		<p>ページが見つかりません。</p>
+		<p>あなたがお探しのページは<br>
+			移動もしくは削除された可能性があります。</p>
+
+		<form class="p-error__form" action="search" method="get">
+			<label>ID:<input class="p-error__input" type="search" name="id"></label>
+			<div><input class="c-button__search" type="submit" value="検索" /></div>
+		</form>
+		<a href="/items/index" class="c-button__back">一覧画面に戻る</a>
+	</main>
+</body>
+
+</html>
