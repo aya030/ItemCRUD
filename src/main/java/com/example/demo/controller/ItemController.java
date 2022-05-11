@@ -103,9 +103,7 @@ public class ItemController {
 		model.addAttribute("logo", "AyaDesign");
 
 		model.addAttribute("item", item);
-		Map<String, String> radioCategory;
-		radioCategory = itemService.initRadioCategory();
-		model.addAttribute("radioCategory", radioCategory);
+		model.addAttribute("radioCategory", itemService.initRadioCategory());
 		return "items/new";
 	}
 
@@ -115,8 +113,7 @@ public class ItemController {
 		if (result.hasErrors()) {
 			model.addAttribute("title", "商品APP_新規登録");
 			model.addAttribute("logo", "AyaDesign");
-			Map<String, String> radioCategory = itemService.initRadioCategory();
-			model.addAttribute("radioCategory", radioCategory);
+			model.addAttribute("radioCategory", itemService.initRadioCategory());
 			return "items/new";
 		}
 		itemService.insertOne(item);
@@ -150,7 +147,6 @@ public class ItemController {
 	@PostMapping("/edit/id={id}")
 	public String update(@PathVariable("id") int id, Model model, @Validated @ModelAttribute Item item,
 			BindingResult result) {
-		Optional<Item> itemSearch = itemService.findById(id);
 		if (result.hasErrors()) {
 			model.addAttribute("title", "商品APP_更新");
 			model.addAttribute("logo", "AyaDesign");
@@ -158,10 +154,10 @@ public class ItemController {
 			Map<String, String> radioCategory = itemService.initRadioCategory();
 			model.addAttribute("radioCategory", radioCategory);
 			return "items/edit";
-		} else if (itemSearch.isPresent()) {
-			Item item2 = itemService.findById(id).get();
-			model.addAttribute("item", item2);
-			itemService.updateOne(item.getId(), item.getName(), item.getPrice(), item.getCategory(), item.getNum());
+		}
+		Optional<Item> itemSearch = itemService.findById(id);
+		if (itemSearch.isPresent()) {
+			itemService.updateOne(id, item.getName(), item.getPrice(), item.getCategory(), item.getNum());
 			return "redirect:/items/index";
 		} else {
 			return "error/404";
