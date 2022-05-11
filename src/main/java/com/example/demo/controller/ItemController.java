@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
@@ -39,8 +37,7 @@ public class ItemController {
 
 		model.addAttribute("title", "商品APP_一覧画面");
 		model.addAttribute("logo", "AyaDesign");
-		List<Item> itemList = itemService.getItemList();
-		model.addAttribute("itemList", itemList);
+		model.addAttribute("itemList", itemService.getItemList());
 		return "index";
 	}
 
@@ -62,8 +59,7 @@ public class ItemController {
 			// inputの中身が空の時
 			model.addAttribute("title", "商品APP_一覧画面");
 			model.addAttribute("logo", "AyaDesign");
-			List<Item> itemList = itemService.getItemList();
-			model.addAttribute("itemList", itemList);
+			model.addAttribute("itemList", itemService.getItemList());
 
 			model.addAttribute("message", "* 入力の値がありません。IDを入力してください");
 
@@ -197,8 +193,7 @@ public class ItemController {
 	public String bindExceptionHandler(Model model) {
 		model.addAttribute("title", "商品APP_一覧画面");
 		model.addAttribute("logo", "AyaDesign");
-		List<Item> itemList = itemService.getItemList();
-		model.addAttribute("itemList", itemList);
+		model.addAttribute("itemList", itemService.getItemList());
 
 		model.addAttribute("message", "* IDが不正です。数字を入力してください");
 		return "index";
@@ -209,8 +204,7 @@ public class ItemController {
 	public String MissingServletRequestParameterExceptionHandler(Model model) {
 		model.addAttribute("title", "商品APP_一覧画面");
 		model.addAttribute("logo", "AyaDesign");
-		List<Item> itemList = itemService.getItemList();
-		model.addAttribute("itemList", itemList);
+		model.addAttribute("itemList", itemService.getItemList());
 
 		return "index";
 	}
