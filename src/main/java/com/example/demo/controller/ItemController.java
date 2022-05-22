@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
@@ -42,7 +43,6 @@ public class ItemController {
 	}
 
 	/* 検索結果 */
-	@SuppressWarnings("unlikely-arg-type")
 	@GetMapping("/search")
 	public String search(ItemForm itemForm, Model model, @RequestParam("id") String id) {
 
@@ -55,7 +55,7 @@ public class ItemController {
 			model.addAttribute("item", item);
 			return "items/search";
 
-		} else if (itemForm.getId() == null || itemForm.getId().equals("")) {
+		} else if (!StringUtils.isBlank(String.valueOf(itemForm.getId()))) {
 			// inputの中身が空の時
 			model.addAttribute("title", "商品APP_一覧画面");
 			model.addAttribute("logo", "AyaDesign");
