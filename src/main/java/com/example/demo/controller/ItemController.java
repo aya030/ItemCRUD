@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.entity.Item;
 import com.example.demo.form.ItemForm;
@@ -80,14 +83,13 @@ public class ItemController {
 		model.addAttribute("logo", "AyaDesign");
 
 		Optional<Item> itemSearch = itemService.findById(id);
-		if (itemSearch.isPresent()) {
+		try {
 			Item item = itemSearch.get();
 			model.addAttribute("item", item);
 
 			return "items/detail";
-		} else {
-
-			return "error/404";
+		} catch (NoSuchElementException e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -120,8 +122,7 @@ public class ItemController {
 	@GetMapping("/edit/id={id}")
 	public String edit(@PathVariable("id") int id, Model model) {
 
-		Optional<Item> itemSearch = itemService.findById(id);
-		if (itemSearch.isPresent()) {
+		try {
 			Item item = itemService.findById(id).get();
 			model.addAttribute("title", "商品APP_更新");
 			model.addAttribute("logo", "AyaDesign");
@@ -130,11 +131,8 @@ public class ItemController {
 			model.addAttribute("radioCategory", itemService.initRadioCategory());
 
 			return "items/edit";
-		} else {
-			model.addAttribute("title", "商品APP_更新");
-			model.addAttribute("logo", "AyaDesign");
-
-			return "error/404";
+		} catch (NoSuchElementException e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -209,3 +207,4 @@ public class ItemController {
 		return "index";
 	}
 }
+
