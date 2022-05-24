@@ -117,7 +117,8 @@ public class ItemController {
 	@GetMapping("/edit/id={id}")
 	public String edit(@PathVariable("id") int id, Model model) {
 
-		Item item = itemService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		Optional<Item> item = itemService.findById(id);
+		item.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 		model.addAttribute("title", "商品APP_更新");
 		model.addAttribute("logo", "AyaDesign");
 
