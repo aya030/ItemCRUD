@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -83,14 +82,10 @@ public class ItemController {
 		model.addAttribute("logo", "AyaDesign");
 
 		Optional<Item> itemSearch = itemService.findById(id);
-		try {
-			Item item = itemSearch.get();
-			model.addAttribute("item", item);
+		Item item = itemSearch.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		model.addAttribute("item", item);
 
-			return "items/detail";
-		} catch (NoSuchElementException e) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-		}
+		return "items/detail";
 	}
 
 	/* 新規商品登録 */
@@ -122,18 +117,14 @@ public class ItemController {
 	@GetMapping("/edit/id={id}")
 	public String edit(@PathVariable("id") int id, Model model) {
 
-		try {
-			Item item = itemService.findById(id).get();
-			model.addAttribute("title", "商品APP_更新");
-			model.addAttribute("logo", "AyaDesign");
+		Item item = itemService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		model.addAttribute("title", "商品APP_更新");
+		model.addAttribute("logo", "AyaDesign");
 
-			model.addAttribute("item", item);
-			model.addAttribute("radioCategory", itemService.initRadioCategory());
+		model.addAttribute("item", item);
+		model.addAttribute("radioCategory", itemService.initRadioCategory());
 
-			return "items/edit";
-		} catch (NoSuchElementException e) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-		}
+		return "items/edit";
 	}
 
 	@PostMapping("/edit/id={id}")
@@ -147,12 +138,9 @@ public class ItemController {
 			return "items/edit";
 		}
 		Optional<Item> itemSearch = itemService.findById(id);
-		if (itemSearch.isPresent()) {
-			itemService.updateOne(id, item.getName(), item.getPrice(), item.getCategory(), item.getNum());
-			return "redirect:/items/index";
-		} else {
-			return "error/404";
-		}
+		itemSearch.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		itemService.updateOne(id, item.getName(), item.getPrice(), item.getCategory(), item.getNum());
+		return "redirect:/items/index";
 	}
 
 	/* 削除 */
