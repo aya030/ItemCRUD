@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.entity.Item;
 import com.example.demo.form.ItemForm;
@@ -39,13 +40,11 @@ public class ItemController {
 
 		model.addAttribute("title", "商品APP_一覧画面");
 		model.addAttribute("logo", "AyaDesign");
-		List<Item> itemList = itemService.getItemList();
-		model.addAttribute("itemList", itemList);
+		model.addAttribute("itemList", itemService.getItemList());
 		return "index";
 	}
 
 	/* 検索結果 */
-	@SuppressWarnings("unlikely-arg-type")
 	@GetMapping("/search")
 	public String search(ItemForm itemForm, Model model, @RequestParam("id") String id) {
 
@@ -58,12 +57,11 @@ public class ItemController {
 			model.addAttribute("item", item);
 			return "items/search";
 
-		} else if (itemForm.getId() == null || itemForm.getId().equals("")) {
+		} else if (!StringUtils.isBlank(String.valueOf(itemForm.getId()))) {
 			// inputの中身が空の時
 			model.addAttribute("title", "商品APP_一覧画面");
 			model.addAttribute("logo", "AyaDesign");
-			List<Item> itemList = itemService.getItemList();
-			model.addAttribute("itemList", itemList);
+			model.addAttribute("itemList", itemService.getItemList());
 
 			model.addAttribute("message", "* 入力の値がありません。IDを入力してください");
 
@@ -84,15 +82,10 @@ public class ItemController {
 		model.addAttribute("logo", "AyaDesign");
 
 		Optional<Item> itemSearch = itemService.findById(id);
-		if (itemSearch.isPresent()) {
-			Item item = itemSearch.get();
-			model.addAttribute("item", item);
+		Item item = itemSearch.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		model.addAttribute("item", item);
 
-			return "items/detail";
-		} else {
-
-			return "error/404";
-		}
+		return "items/detail";
 	}
 
 	/* 新規商品登録 */
@@ -103,9 +96,7 @@ public class ItemController {
 		model.addAttribute("logo", "AyaDesign");
 
 		model.addAttribute("item", item);
-		Map<String, String> radioCategory;
-		radioCategory = itemService.initRadioCategory();
-		model.addAttribute("radioCategory", radioCategory);
+		model.addAttribute("radioCategory", itemService.initRadioCategory());
 		return "items/new";
 	}
 
@@ -115,8 +106,7 @@ public class ItemController {
 		if (result.hasErrors()) {
 			model.addAttribute("title", "商品APP_新規登録");
 			model.addAttribute("logo", "AyaDesign");
-			Map<String, String> radioCategory = itemService.initRadioCategory();
-			model.addAttribute("radioCategory", radioCategory);
+			model.addAttribute("radioCategory", itemService.initRadioCategory());
 			return "items/new";
 		}
 		itemService.insertOne(item);
@@ -127,45 +117,31 @@ public class ItemController {
 	@GetMapping("/edit/id={id}")
 	public String edit(@PathVariable("id") int id, Model model) {
 
-		Optional<Item> itemSearch = itemService.findById(id);
-		if (itemSearch.isPresent()) {
-			Item item = itemService.findById(id).get();
-			model.addAttribute("title", "商品APP_更新");
-			model.addAttribute("logo", "AyaDesign");
+		Optional<Item> itemSerach = itemService.findById(id);
+		Item item = itemSerach.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		model.addAttribute("title", "商品APP_更新");
+		model.addAttribute("logo", "AyaDesign");
 
-			model.addAttribute("item", item);
-			Map<String, String> radioCategory;
-			radioCategory = itemService.initRadioCategory();
-			model.addAttribute("radioCategory", radioCategory);
+		model.addAttribute("item", item);
+		model.addAttribute("radioCategory", itemService.initRadioCategory());
 
-			return "items/edit";
-		} else {
-			model.addAttribute("title", "商品APP_更新");
-			model.addAttribute("logo", "AyaDesign");
-
-			return "error/404";
-		}
+		return "items/edit";
 	}
 
 	@PostMapping("/edit/id={id}")
 	public String update(@PathVariable("id") int id, Model model, @Validated @ModelAttribute Item item,
 			BindingResult result) {
-		Optional<Item> itemSearch = itemService.findById(id);
 		if (result.hasErrors()) {
 			model.addAttribute("title", "商品APP_更新");
 			model.addAttribute("logo", "AyaDesign");
 
-			Map<String, String> radioCategory = itemService.initRadioCategory();
-			model.addAttribute("radioCategory", radioCategory);
+			model.addAttribute("radioCategory", itemService.initRadioCategory());
 			return "items/edit";
-		} else if (itemSearch.isPresent()) {
-			Item item2 = itemService.findById(id).get();
-			model.addAttribute("item", item2);
-			itemService.updateOne(item.getId(), item.getName(), item.getPrice(), item.getCategory(), item.getNum());
-			return "redirect:/items/index";
-		} else {
-			return "error/404";
 		}
+		Optional<Item> itemSearch = itemService.findById(id);
+		itemSearch.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		itemService.updateOne(id, item.getName(), item.getPrice(), item.getCategory(), item.getNum());
+		return "redirect:/items/index";
 	}
 
 	/* 削除 */
@@ -204,8 +180,7 @@ public class ItemController {
 	public String bindExceptionHandler(Model model) {
 		model.addAttribute("title", "商品APP_一覧画面");
 		model.addAttribute("logo", "AyaDesign");
-		List<Item> itemList = itemService.getItemList();
-		model.addAttribute("itemList", itemList);
+		model.addAttribute("itemList", itemService.getItemList());
 
 		model.addAttribute("message", "* IDが不正です。数字を入力してください");
 		return "index";
@@ -216,9 +191,9 @@ public class ItemController {
 	public String MissingServletRequestParameterExceptionHandler(Model model) {
 		model.addAttribute("title", "商品APP_一覧画面");
 		model.addAttribute("logo", "AyaDesign");
-		List<Item> itemList = itemService.getItemList();
-		model.addAttribute("itemList", itemList);
+		model.addAttribute("itemList", itemService.getItemList());
 
 		return "index";
 	}
 }
+
