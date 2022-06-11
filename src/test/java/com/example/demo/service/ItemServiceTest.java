@@ -98,7 +98,7 @@ public class ItemServiceTest {
 		expected.put("0", "ピアス");
 		expected.put("1", "イヤリング");
 		expected.put("2", "ネックレス");
-		assertEquals(expected,itemService.initRadioCategory());
+		assertEquals(expected, itemService.initRadioCategory());
 		
 		/*initRadioCategory()の要素数は3である*/
 		assertEquals(3, itemService.initRadioCategory().size());
