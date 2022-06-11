@@ -75,28 +75,24 @@ public class ItemServiceTest {
 	public void testInsertOne() {
 		itemService.insertOne(item);
 		verify(itemMapper, times(1)).insertOne(item);
-
-		Item item2 = new Item(2, "マーガレットピアス", 2400, "ピアス", 3);
-		itemService.insertOne(item2);
-		verify(itemMapper, times(1)).insertOne(item2);
 	}
 
 	@Test
-	@DisplayName("updateOne()を呼び出したら1回実行される")
+	@DisplayName("idが2の更新処理を呼び出したときにmapperの更新処理が1回のみ実行され正常に処理が完了すること")
 	public void updateOne() {
 		itemService.updateOne(2, "マーガレットピアス", 2400, "ピアス", 3);
 		verify(itemMapper, times(1)).updateOne(2, "マーガレットピアス", 2400, "ピアス", 3);
 	}
 
 	@Test
-	@DisplayName("idが1のdeleteOne()を呼び出したら1回実行される")
+	@DisplayName("idが1の削除処理を呼び出したら削除処理が1回のみ実行され正常に処理が完了すること")
 	public void testDeleteOne() {
 		itemService.deleteOne(1);
 		verify(itemMapper, times(1)).deleteOne(1);
 	}
 
 	@Test
-	@DisplayName("initRadioCategoryのMapの値が保持させている")
+	@DisplayName("initRadioCategoryのMapの値が保持できていること")
 	public void initRadioCategory() {
 		Map<String, String> expected = new HashMap<>();
 		expected.put("0", "ピアス");
