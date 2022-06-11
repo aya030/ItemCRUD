@@ -12,12 +12,9 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 
 import com.example.demo.entity.Item;
 import com.example.demo.repository.ItemMapper;
@@ -74,7 +71,7 @@ public class ItemServiceTest {
 	}
 
 	@Test
-	@DisplayName("insertOne()を呼び出したら1回実行される")
+	@DisplayName("登録処理を呼び出したときにmapperの登録処理が1回のみ実行され正常に処理が完了すること")
 	public void testInsertOne() {
 		itemService.insertOne(item);
 		verify(itemMapper, times(1)).insertOne(item);
