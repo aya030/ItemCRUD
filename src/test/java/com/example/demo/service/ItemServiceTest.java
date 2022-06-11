@@ -22,9 +22,7 @@ import org.springframework.context.annotation.Import;
 import com.example.demo.entity.Item;
 import com.example.demo.repository.ItemMapper;
 
-@ExtendWith(MockitoExtension.class)
 @SpringBootTest(classes = ItemService.class)
-@Import(Item.class)
 public class ItemServiceTest {
 	@MockBean
 	ItemMapper itemMapper;
