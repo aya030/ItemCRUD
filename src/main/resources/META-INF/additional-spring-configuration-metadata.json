@@ -8,5 +8,30 @@
     "name": "mapper-locations",
     "type": "java.lang.String",
     "description": "A description for 'mapper-locations'"
+  },
+  {
+    "name": "enableLoggingRequestDetails",
+    "type": "java.lang.String",
+    "description": "A description for 'enableLoggingRequestDetails'"
+  },
+  {
+    "name": "enableLoggingRequestDetails",
+    "type": "java.lang.String",
+    "description": "A description for 'enableLoggingRequestDetails'"
+  },
+  {
+    "name": "enableLoggingRequestDetails",
+    "type": "java.lang.String",
+    "description": "A description for 'enableLoggingRequestDetails'"
+  },
+  {
+    "name": "enableLoggingRequestDetails",
+    "type": "java.lang.String",
+    "description": "A description for 'enableLoggingRequestDetails'"
+  },
+  {
+    "name": "enableLoggingRequestDetails",
+    "type": "java.lang.String",
+    "description": "A description for 'enableLoggingRequestDetails'"
   }
 ]}
