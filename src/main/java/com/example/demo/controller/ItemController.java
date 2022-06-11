@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -24,7 +25,7 @@ import com.example.demo.form.ItemForm;
 import com.example.demo.service.ItemService;
 
 @Controller
-//@RequestMapping("/items")
+@RequestMapping("/items")
 public class ItemController {
 
 	private final ItemService itemService;
