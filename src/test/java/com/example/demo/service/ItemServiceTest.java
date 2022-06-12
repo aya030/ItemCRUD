@@ -44,17 +44,14 @@ public class ItemServiceTest {
 
 		Item findById = itemService.findById(id).get();
 		assertEquals(1, findById.getId());
-		assertEquals("ひまわりピアス", findById.getName());
-		assertEquals(1800, findById.getPrice());
-		assertEquals("ピアス", findById.getCategory());
-		assertEquals(2, findById.getNum());
+		verify(itemMapper, times(1)).findById(1);
 	}
 
 	@Test
 	public void 検索idにNULLを渡してもNullPointerExceptionにならない() {
-		int id = 1;
-		when(itemMapper.findById(id)).thenReturn(Optional.of(item));
-		assertNotNull(itemService.findById(2));
+		Object id = null;
+		when(itemMapper.findById((Integer) id)).thenReturn(Optional.of(item));
+		assertNotNull(itemService.findById((Integer) id));
 	}
 
 	@Test
@@ -73,13 +70,13 @@ public class ItemServiceTest {
 	}
 
 	@Test
-	public void idが2の更新処理を呼び出したときにmapperの更新処理が1回のみ実行され正常に処理が完了すること() {
+	public void 該当のIDのデータが正常に更新されること() {
 		itemService.updateOne(2, "マーガレットピアス", 2400, "ピアス", 3);
 		verify(itemMapper, times(1)).updateOne(2, "マーガレットピアス", 2400, "ピアス", 3);
 	}
 
 	@Test
-	public void idが1の削除処理を呼び出したら削除処理が1回のみ実行され正常に処理が完了すること() {
+	public void 該当のIDのデータが一件削除されること() {
 		itemService.deleteOne(1);
 		verify(itemMapper, times(1)).deleteOne(1);
 	}
