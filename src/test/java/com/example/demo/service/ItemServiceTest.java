@@ -71,8 +71,15 @@ public class ItemServiceTest {
 
 	@Test
 	public void 該当のIDのデータが正常に更新されること() {
+		item.setId(2);
+		item.setName("マーガレットピアス");
+		item.setPrice(2400);
+		item.setCategory("ピアス");
+		item.setNum(3);
 		itemService.updateOne(2, "マーガレットピアス", 2400, "ピアス", 3);
-		verify(itemMapper, times(1)).updateOne(2, "マーガレットピアス", 2400, "ピアス", 3);
+		when(itemMapper.findById(2)).thenReturn(Optional.of(item));
+		Item findById = itemService.findById(2).get();
+		assertEquals(2, findById.getId());
 	}
 
 	@Test
