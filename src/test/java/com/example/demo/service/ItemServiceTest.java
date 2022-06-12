@@ -38,7 +38,7 @@ public class ItemServiceTest {
 	}
 
 	@Test
-	public void 検索idに1を渡すとidが１に紐づいたデータと一致する() {
+	public void 該当するIDのItemが一件取得されること() {
 		int id = 1;
 		when(itemMapper.findById(id)).thenReturn(Optional.of(item));
 
@@ -67,7 +67,7 @@ public class ItemServiceTest {
 	}
 
 	@Test
-	public void 登録処理を呼び出したときにmapperの登録処理が1回のみ実行され正常に処理が完了すること() {
+	public void データが新規登録されること() {
 		itemService.insertOne(item);
 		verify(itemMapper, times(1)).insertOne(item);
 	}
