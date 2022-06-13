@@ -82,20 +82,18 @@ public class ItemServiceTest {
 
 	@Test
 	public void 該当のIDのデータが正常に更新されること() {
-		item.setId(2);
 		item.setName("マーガレットピアス");
-		item.setPrice(2400);
-		item.setCategory("ピアス");
-		item.setNum(3);
-		itemService.updateOne(2, "マーガレットピアス", 2400, "ピアス", 3);
-		when(itemMapper.findById(2)).thenReturn(Optional.of(item));
-		Item findById = itemService.findById(2).get();
-		assertEquals(2, findById.getId());
+		itemService.updateOne(1, "マーガレットピアス", 2400, "ピアス", 3);
+		when(itemMapper.findById(1)).thenReturn(Optional.of(item));
+		Item findById = itemService.findById(1).get();
+		assertEquals("マーガレットピアス", findById.getName());
 	}
 
 	@Test
 	public void 該当のIDのデータが一件削除されること() {
+		when(itemMapper.findAll()).thenReturn(List.of(item));
 		itemService.deleteOne(1);
+		assertEquals(0, itemService.getItemList().size());
 		verify(itemMapper, times(1)).deleteOne(1);
 	}
 
