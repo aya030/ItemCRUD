@@ -41,10 +41,11 @@ public class ItemServiceTest {
 	public void 該当するIDのItemが一件取得されること() {
 		int id = 1;
 		when(itemMapper.findById(id)).thenReturn(Optional.of(item));
-
 		Item findById = itemService.findById(id).get();
 		assertEquals(1, findById.getId());
 		verify(itemMapper, times(1)).findById(1);
+		when(itemMapper.findAll()).thenReturn(List.of(item));
+		assertEquals(1, itemMapper.findAll().size());
 	}
 
 	@Test
