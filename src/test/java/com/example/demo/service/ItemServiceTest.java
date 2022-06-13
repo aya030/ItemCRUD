@@ -65,19 +65,11 @@ public class ItemServiceTest {
 
 	@Test
 	public void データが新規登録されること() {
-		when(itemMapper.findById(1)).thenReturn(Optional.of(item));
-		Item findById = itemService.findById(1).get();
-		assertEquals(1, findById.getId());
-		item.setId(2);
-		item.setName("マーガレットピアス");
-		item.setPrice(2400);
-		item.setCategory("ピアス");
-		item.setNum(3);
+		assertEquals(0, itemMapper.findAll().size());
+		when(itemMapper.findAll()).thenReturn(List.of(item));
 		itemService.insertOne(item);
+		assertEquals(1, itemMapper.findAll().size());
 		verify(itemMapper, times(1)).insertOne(item);
-		when(itemMapper.findById(2)).thenReturn(Optional.of(item));
-		findById = itemService.findById(2).get();
-		assertEquals(2, findById.getId());
 	}
 
 	@Test
