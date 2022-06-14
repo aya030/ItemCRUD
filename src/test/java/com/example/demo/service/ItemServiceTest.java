@@ -23,7 +23,7 @@ public class ItemServiceTest {
 	ItemMapper itemMapper;
 
 	@Autowired
-	ItemService itemService = new ItemService(itemMapper);
+	ItemService itemService;
 
 	@Test
 	public void 該当するIDのItemが一件取得されること() {
