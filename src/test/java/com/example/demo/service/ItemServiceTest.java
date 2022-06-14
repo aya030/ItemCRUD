@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,18 +25,9 @@ public class ItemServiceTest {
 	@Autowired
 	ItemService itemService = new ItemService(itemMapper);
 
-	@BeforeEach
-	public void beforeEach() {
-		Item item = new Item();
-		item.setId(1);
-		item.setName("ひまわりピアス");
-		item.setPrice(1800);
-		item.setCategory("ピアス");
-		item.setNum(2);
-	}
-
 	@Test
 	public void 該当するIDのItemが一件取得されること() {
+		Item item = new Item(1, "ひまわりピアス", 1800, "ピアス", 2);
 		int id = 1;
 		when(itemMapper.findById(id)).thenReturn(Optional.of(item));
 		Item findById = itemService.findById(id).get();
@@ -49,6 +39,7 @@ public class ItemServiceTest {
 
 	@Test
 	public void 検索idにNULLを渡してもNullPointerExceptionにならない() {
+		Item item = new Item(1, "ひまわりピアス", 1800, "ピアス", 2);
 		Object id = null;
 		when(itemMapper.findById((Integer) id)).thenReturn(Optional.of(item));
 		assertNotNull(itemService.findById((Integer) id));
@@ -65,6 +56,7 @@ public class ItemServiceTest {
 
 	@Test
 	public void データが新規登録されること() {
+		Item item = new Item(1, "ひまわりピアス", 1800, "ピアス", 2);
 		assertEquals(0, itemMapper.findAll().size());
 		when(itemMapper.findAll()).thenReturn(List.of(item));
 		itemService.insertOne(item);
@@ -74,6 +66,7 @@ public class ItemServiceTest {
 
 	@Test
 	public void 該当のIDのデータが正常に更新されること() {
+		Item item = new Item(1, "ひまわりピアス", 1800, "ピアス", 2);
 		item.setName("マーガレットピアス");
 		itemService.updateOne(1, "マーガレットピアス", 2400, "ピアス", 3);
 		when(itemMapper.findById(1)).thenReturn(Optional.of(item));
@@ -83,6 +76,7 @@ public class ItemServiceTest {
 
 	@Test
 	public void 該当のIDのデータが一件削除されること() {
+		Item item = new Item(1, "ひまわりピアス", 1800, "ピアス", 2);
 		when(itemMapper.findAll()).thenReturn(List.of(item));
 		itemService.deleteOne(1);
 		assertEquals(0, itemService.getItemList().size());
