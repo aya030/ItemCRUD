@@ -43,7 +43,8 @@ public class ItemServiceTest {
 		Item item2 = new Item(3, "チューリップイヤリング", 3450, "イヤリング", 5);
 		when(itemMapper.findAll()).thenReturn(List.of(item1, item2));
 		assertEquals(2, itemMapper.findAll().size());
-		assertThat(itemMapper.findAll()).hasSize(2);
+		/*assertJを使ったテスト*/
+//		assertThat(itemMapper.findAll()).hasSize(2);
 	}
 
 	@Test
