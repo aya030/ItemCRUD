@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -69,10 +68,7 @@ public class ItemServiceTest {
 
 	@Test
 	public void 該当のIDのデータが一件削除されること() {
-		Item item = new Item(1, "ひまわりピアス", 1800, "ピアス", 2);
-		when(itemMapper.findAll()).thenReturn(List.of(item));
 		itemService.deleteOne(1);
-		assertEquals(0, itemService.getItemList().size());
 		verify(itemMapper, times(1)).deleteOne(1);
 	}
 
