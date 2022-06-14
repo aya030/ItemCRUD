@@ -38,14 +38,6 @@ public class ItemServiceTest {
 	}
 
 	@Test
-	public void 検索idにNULLを渡してもNullPointerExceptionにならない() {
-		Item item = new Item(1, "ひまわりピアス", 1800, "ピアス", 2);
-		Object id = null;
-		when(itemMapper.findById((Integer) id)).thenReturn(Optional.of(item));
-		assertNotNull(itemService.findById((Integer) id));
-	}
-
-	@Test
 	public void データをリスト表示するとデータ数が一致する() {
 		Item item1 = new Item(2, "マーガレットピアス", 2400, "ピアス", 3);
 		Item item2 = new Item(3, "チューリップイヤリング", 3450, "イヤリング", 5);
