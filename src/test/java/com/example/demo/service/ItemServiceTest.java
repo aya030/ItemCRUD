@@ -25,11 +25,10 @@ public class ItemServiceTest {
 
 	@Autowired
 	ItemService itemService = new ItemService(itemMapper);
-	
-	Item item = new Item();
 
 	@BeforeEach
 	public void beforeEach() {
+		Item item = new Item();
 		item.setId(1);
 		item.setName("ひまわりピアス");
 		item.setPrice(1800);
