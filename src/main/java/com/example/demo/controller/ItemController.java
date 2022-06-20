@@ -57,7 +57,7 @@ public class ItemController {
 			if (result.hasErrors()) {
 
 				model.addAttribute("title", "商品APP_一覧画面");
-				model.addAttribute("message", "* IDが空白です。IDを入力してください");
+				model.addAttribute("message", "* 入力の値がありません。IDを入力してください");
 
 				return "index";
 
@@ -194,3 +194,4 @@ public class ItemController {
 		return "index";
 	}
 }
+
