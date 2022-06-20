@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,30 +46,28 @@ public class ItemController {
 
 	/* 検索結果 */
 	@GetMapping("/search")
-	public String search(ItemForm itemForm, Model model, @RequestParam("id") String id) {
+	public String search(@RequestParam("id") String id, Model model,
+			@Validated @ModelAttribute("itemForm") ItemForm itemForm, BindingResult result) {
 
 		model.addAttribute("title", "商品APP_検索結果");
 		model.addAttribute("logo", "AyaDesign");
 
 		Optional<Item> itemSearch = itemService.findById(itemForm.getId());
-		if (itemSearch.isPresent()) {
-			Item item = itemSearch.get();
-			model.addAttribute("item", item);
-			return "items/search";
+		try {
+			if (result.hasErrors()) {
 
-		} else if (!StringUtils.isBlank(String.valueOf(itemForm.getId()))) {
-			// inputの中身が空の時
-			model.addAttribute("title", "商品APP_一覧画面");
-			model.addAttribute("logo", "AyaDesign");
-			model.addAttribute("itemList", itemService.getItemList());
+				model.addAttribute("title", "商品APP_一覧画面");
+				model.addAttribute("message", "* IDが空白です。IDを入力してください");
 
-			model.addAttribute("message", "* 入力の値がありません。IDを入力してください");
+				return "index";
 
-			return "index";
-		} else {
+			} else {
+				model.addAttribute("item", itemSearch.get());
+				return "items/search";
+			}
+		} catch (NoSuchElementException e) {
 			model.addAttribute("title", "商品APP_一覧画面");
 			model.addAttribute("message", "* IDが" + id + "の商品は存在しません");
-
 			return "index";
 		}
 	}
@@ -196,4 +194,3 @@ public class ItemController {
 		return "index";
 	}
 }
-

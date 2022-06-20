@@ -14,8 +14,8 @@
 	</header>
 	<main class="l-index l-main">
 		<h2>商品一覧</h2>
-		<form class="p-index__form" action="search" method="get">
-			<label>ID:<input class="p-index__input" type="search" name="id"></label>
+		<form class="p-index__form" action="search" th:action="@{/items/search}" method="get" th:object="${itemForm}">
+			<label>ID:<input class="p-index__input" type="search" name="id" th:field="*{id}"></label>
 			<div><input class="c-button__search" type="submit" value="検索" /></div>
 		    <span class="p-index__errormessage" th:text=${message}></span>
 		</form>
