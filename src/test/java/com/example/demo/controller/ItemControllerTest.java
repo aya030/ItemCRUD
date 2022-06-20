@@ -6,6 +6,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -123,6 +124,7 @@ public class ItemControllerTest {
 		mockMvc.perform(get("/items/search")
 			   .param("id", ""))
 			   .andExpect(status().isOk())
+			   .andExpect(model().hasErrors())
 			   .andExpect(model().attribute("message", "* 入力の値がありません。IDを入力してください"))
 			   .andExpect(view().name("index"));
 	}
@@ -132,20 +134,20 @@ public class ItemControllerTest {
 		mockMvc.perform(get("/items/search")
 			   .param("id", "  "))
 			   .andExpect(status().isOk())
+			   .andExpect(model().hasErrors())
 			   .andExpect(model().attribute("message", "* 入力の値がありません。IDを入力してください"))
 			   .andExpect(view().name("index"));
 	}
 	
-	//コントローラーの分岐が上手く行っていない
-//	@Test
-//	public void 検索のidに存在しないIDを入れて検索を押すと例外情報が入った状態で画面が返る事() throws Exception {
-//		when(itemService.getItemList()).thenReturn(getItemTestList());
-//		mockMvc.perform(get("/items/search")
-//			.param("id", "99")).andDo(print())
-//			.andExpect(status().isOk())
-//			.andExpect(model().attribute("message", "* IDが99の商品は存在しません"))
-//			.andExpect(view().name("index"));
-//	}
+	@Test
+	public void 検索のidに存在しないIDを入れて検索を押すと例外メッセージが入った状態で画面が返る事() throws Exception {
+		when(itemService.getItemList()).thenReturn(getItemTestList());
+		mockMvc.perform(get("/items/search")
+			.param("id", "99"))
+			.andExpect(status().isOk())
+			.andExpect(model().attribute("message", "* IDが99の商品は存在しません"))
+			.andExpect(view().name("index"));
+	}
 	
 	@Test
 	public void 詳細ページのリクエスト結果が正常となりViewとしてdetailが返る事() throws Exception {
