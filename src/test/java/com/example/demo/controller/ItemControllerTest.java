@@ -67,7 +67,7 @@ public class ItemControllerTest {
 	}
 	
     public List<Item> getItemTestList() {
-
+    	
         List<Item> items = new ArrayList<>();
 
         Item item1 = new Item();
@@ -142,10 +142,10 @@ public class ItemControllerTest {
 	public void 検索のidに存在しないIDを入れて検索を押すと例外メッセージが入った状態で画面が返る事() throws Exception {
 		when(itemService.getItemList()).thenReturn(getItemTestList());
 		mockMvc.perform(get("/items/search")
-			.param("id", "99"))
-			.andExpect(status().isOk())
-			.andExpect(model().attribute("message", "* IDが99の商品は存在しません"))
-			.andExpect(view().name("index"));
+			   .param("id", "99"))
+			   .andExpect(status().isOk())
+			   .andExpect(model().attribute("message", "* IDが99の商品は存在しません"))
+			   .andExpect(view().name("index"));
 	}
 	
 	@Test
