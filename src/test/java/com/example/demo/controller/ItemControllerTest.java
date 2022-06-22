@@ -66,9 +66,9 @@ public class ItemControllerTest {
 		return Optional.ofNullable(item);
 	}
 	
-    public List<Item> getItemTestList() {
-    	
-        List<Item> items = new ArrayList<>();
+	public List<Item> getItemTestList() {
+		
+		List<Item> items = new ArrayList<>();
 
         Item item1 = new Item();
 		item1.setId(1);
