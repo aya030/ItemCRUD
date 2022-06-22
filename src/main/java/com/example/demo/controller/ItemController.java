@@ -52,7 +52,6 @@ public class ItemController {
 		model.addAttribute("title", "商品APP_検索結果");
 		model.addAttribute("logo", "AyaDesign");
 
-		Optional<Item> itemSearch = itemService.findById(itemForm.getId());
 		try {
 			if (result.hasErrors()) {
 
@@ -62,6 +61,7 @@ public class ItemController {
 				return "index";
 
 			} else {
+				Optional<Item> itemSearch = itemService.findById(itemForm.getId());
 				model.addAttribute("item", itemSearch.get());
 				return "items/search";
 			}
@@ -194,4 +194,3 @@ public class ItemController {
 		return "index";
 	}
 }
-
