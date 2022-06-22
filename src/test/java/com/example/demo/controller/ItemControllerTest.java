@@ -103,7 +103,7 @@ public class ItemControllerTest {
 	}
 	
 	@Test
-	public void 検索にid1を入力して検索を押すとseachが呼ばれている事() throws Exception {
+	public void 検索にid1を入力して検索を押すとsearchが呼ばれている事() throws Exception {
 		when(itemService.findById(1)).thenReturn(getItemTest());
 		mockMvc.perform(get("/items/search")
 			   .param("id", "1"))
@@ -299,3 +299,4 @@ public class ItemControllerTest {
 	}
 
 }
+
