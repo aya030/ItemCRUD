@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
@@ -52,22 +51,24 @@ public class ItemController {
 		model.addAttribute("title", "商品APP_検索結果");
 		model.addAttribute("logo", "AyaDesign");
 
-		try {
-			if (result.hasErrors()) {
+		if (result.hasErrors()) {
 
-				model.addAttribute("title", "商品APP_一覧画面");
-				model.addAttribute("message", "* 入力の値がありません。IDを入力してください");
+			model.addAttribute("title", "商品APP_一覧画面");
+			model.addAttribute("message", "* 入力の値がありません。IDを入力してください");
 
-				return "index";
+			return "index";
+		}
 
-			} else {
-				Optional<Item> itemSearch = itemService.findById(itemForm.getId());
-				model.addAttribute("item", itemSearch.get());
-				return "items/search";
-			}
-		} catch (NoSuchElementException e) {
+		Optional<Item> itemSearch = itemService.findById(itemForm.getId());
+		if (itemSearch.isPresent()) {
+			Item item = itemSearch.get();
+			model.addAttribute("item", item);
+
+			return "items/search";
+		} else {
 			model.addAttribute("title", "商品APP_一覧画面");
 			model.addAttribute("message", "* IDが" + id + "の商品は存在しません");
+
 			return "index";
 		}
 	}
