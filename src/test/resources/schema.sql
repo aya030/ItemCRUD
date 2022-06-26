@@ -1,8 +1,8 @@
 --itemtableがあれば削除
-DROP TABLE IF EXISTS itemtable;
+DROP TABLE IF EXISTS itemtabletest;
 
 --itemtableがなければ新しく作成
- CREATE TABLE IF NOT EXISTS itemtable(
+ CREATE TABLE IF NOT EXISTS itemtabletest(
 id INT AUTO_INCREMENT,
 name VARCHAR(50) NOT NULL,
 price INT NOT NULL,

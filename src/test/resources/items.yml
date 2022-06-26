@@ -1,0 +1,16 @@
+itemtabletest: 
+  - id: 1
+    name: "ひピアス"
+    price: 3600
+    category: "ピアス"
+    num: 3
+  - id: 2
+    name: マーガレットイヤリング
+    price: 2600
+    category: イヤリング
+    num: 1
+  - id: 3
+    name: デイジーイヤリング
+    price: 2800
+    category: イヤリング
+    num: 2
