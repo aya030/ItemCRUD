@@ -1,9 +1,0 @@
-cacheConnection: false
-cacheTableNames: false
-properties:
-  schema: itemdatabase
-caseInsensitiveStrategy: LOWERCASE
-connectionConfig:
-  url: "jdbc:mysql://localhost:3306/itemdatabase"
-  user: "root"
-  password: 
