@@ -4,14 +4,15 @@ version: '3.1'
 services:
 
   db:
+    platform: linux/x86_64 
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: example
+      MYSQL_ROOT_PASSWORD: 
       MYSQL_DATABASE: itemdatabase
       MYSQL_USER: user
-      MYSQL_PASSWORD: example
+      MYSQL_PASSWORD: 
     ports:
       - 3307:3306
     volumes:
