@@ -49,7 +49,7 @@ public class ItemMapperTest {
 	@DataSet("items.yml")
 	public void 新規登録が出来る事() throws Exception {
 		
-		Item item = new Item(4, "パンジーイヤリング",2400,"イヤリング",2);
+		Item item = new Item(4, "パンジーイヤリング", 2400, "イヤリング", 2);
 		itemMapper.insertOne(item);
 		Item actual = itemMapper.findById(4).get();
 		
@@ -68,7 +68,7 @@ public class ItemMapperTest {
 	@DataSet("items.yml")
 	public void IDに紐づく1件の更新が出来る事() throws Exception {
 		
-		itemMapper.updateOne(1,"チューリップイヤリング",3800,"イヤリング",1);
+		itemMapper.updateOne(1, "チューリップイヤリング", 3800, "イヤリング", 1);
 		Item actual = itemMapper.findById(1).get();
 		
 		assertEquals(1, actual.getId());
@@ -93,7 +93,7 @@ public class ItemMapperTest {
 	@DataSet("items.yml")
 	public void 既に存在するキーで登録しようとするとDuplicateKeyExceptionとなる事() throws Exception {
 		
-		Item item = new Item(1, "チューリップイヤリング",2800,"イヤリング",5);
+		Item item = new Item(1, "チューリップイヤリング", 2800, "イヤリング", 5);
 		
 		assertThatThrownBy(() -> {
 			itemMapper.insertOne(item);
