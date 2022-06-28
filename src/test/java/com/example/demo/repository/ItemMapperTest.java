@@ -44,7 +44,7 @@ public class ItemMapperTest {
 		assertEquals(3, actual.size());
 		
 	}
-//	
+
 	@Test
 	@DataSet("items.yml")
 	public void 新規登録が出来る事() throws Exception {
