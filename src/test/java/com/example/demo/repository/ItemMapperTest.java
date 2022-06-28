@@ -4,13 +4,13 @@ import com.example.demo.entity.Item;
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.configuration.Orthography;
 import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.web.bind.MissingPathVariableException;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,6 +48,7 @@ public class ItemMapperTest {
 
 	@Test
 	@DataSet("items.yml")
+	@ExpectedDataSet("new.yml")
 	public void 新規登録が出来る事() throws Exception {
 
 		Item item = new Item(4, "パンジーイヤリング", 2400, "イヤリング", 2);
@@ -67,6 +68,7 @@ public class ItemMapperTest {
 
 	@Test
 	@DataSet("items.yml")
+	@ExpectedDataSet("edit.yml")
 	public void IDに紐づく1件の更新が出来る事() throws Exception {
 
 		itemMapper.updateOne(1, "チューリップイヤリング", 3800, "イヤリング", 1);
@@ -82,6 +84,7 @@ public class ItemMapperTest {
 
 	@Test
 	@DataSet("items.yml")
+	@ExpectedDataSet("delete.yml")
 	public void IDに紐づく1件の削除が出来る事() throws Exception {
 
 		itemMapper.deleteOne(2);
