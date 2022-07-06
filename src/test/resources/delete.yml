@@ -1,0 +1,12 @@
+itemtable:
+  - id: 1
+    name: "ひまわりピアス"
+    price: 3600
+    category: "ピアス"
+    num: 3
+  - id: 3
+    name: デイジーイヤリング
+    price: 2800
+    category: イヤリング
+    num: 2
+    

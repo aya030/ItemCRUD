@@ -1,0 +1,17 @@
+itemtable:
+  - id: 1
+    name: "チューリップイヤリング"
+    price: 3800
+    category: "イヤリング"
+    num: 1
+  - id: 2
+    name: マーガレットイヤリング
+    price: 2600
+    category: イヤリング
+    num: 1
+  - id: 3
+    name: デイジーイヤリング
+    price: 2800
+    category: イヤリング
+    num: 2
+    
